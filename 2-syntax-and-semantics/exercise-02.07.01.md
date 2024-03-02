@@ -1,7 +1,7 @@
 # Exercise 2.7.1
 
-Give derivations for the judgments $\{ y, z \} \vdash (\lambda x. x) y$ and $\emptyset \vdash \lambda x. x$.
-Explain why the judgment $\{x, y\} \vdash z$ is not be derivable.
+> Give derivations for the judgments $\{ y, z \} \vdash (\lambda x. x) y$ and $\emptyset \vdash \lambda x. x$.
+> Explain why the judgment $\{x, y\} \vdash z$ is not derivable.
 
 ---
 
