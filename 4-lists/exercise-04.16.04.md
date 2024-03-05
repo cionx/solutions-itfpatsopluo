@@ -18,7 +18,7 @@ $$
       &\coloneqq
       [\,] \,,
       \\
-      \mathit{delet} \enspace ((a', b') :: m') \enspace a
+      \mathit{delete} \enspace ((a', b') :: m') \enspace a
       &\coloneqq
       \text{if } a = a' \text{ then } m' \text{ else } (a', b') :: (\mathit{delete} \enspace m' \enspace a)
     \end{aligned}
