@@ -27,6 +27,17 @@ let lex s =
   in
   lex' 0 []
 
-
-
-(** We don’t know how to write a parser in this case. *)
+let rec tree l =
+  let (t, l) = ptree l in tree' t l
+and tree' t l = match l with
+  | BT :: l ->
+    let (t', l) = ptree l in
+    (B (t, t'), l)
+  | _ -> (t, l)
+and ptree l = match l with
+  | AT :: l -> (A, l)
+  | LP :: l ->
+    let (t, l) = tree l in
+    let l = verify RP l in
+    (t, l)
+  | _ -> failwith "ptree"

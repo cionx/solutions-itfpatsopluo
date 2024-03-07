@@ -28,6 +28,18 @@ let lex s =
   in
   lex' 0 []
 
-
-
-(** We don’t know how to write a parser. *)
+let rec tree l = match l with
+  | AT :: l -> (A, l)
+  | LP :: l ->
+    let (t1, l) = tree l in tree' t1 l
+  | _ -> failwith "tree"
+and tree' t1 l = match l with
+  | BT :: l ->
+    let (t2, l) = tree l in
+    let l = verify RP l in
+    (B (t1, t2), l)
+  | CT :: l ->
+    let (t2, l) = tree l in
+    let l = verify RP l in
+    (C (t1, t2), l)
+  | _ -> failwith "tree'"
