@@ -29,7 +29,7 @@ let rec exp e = match e with
   | e -> cexp e
 and cexp e = match e with
   | Oapp (Leq, e1, e2) ->
-    exp e1 ^ " <= " ^ exp e2
+    sexp e1 ^ " <= " ^ sexp e2
   | e -> sexp e
 and sexp e = match e with
   | Oapp(Add, e1, e2) ->
