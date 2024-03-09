@@ -32,7 +32,7 @@ type exp =
 
 
 
-## Lexer
+## Lexing
 
 We will use an auxiliary function to help us parse numbers and identifiers:
 ```ocaml
