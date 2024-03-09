@@ -227,7 +227,7 @@ let rec lin_exp e = match e with
     "fun " ^ x ^ " -> " ^ lin_exp e
   | ELet (x, e1, e2) ->
     "let " ^ x ^ " = " ^ lin_exp e1 ^ " in " ^ lin_exp e2
-  | ELetrec(f, x, e1, e2) ->
+  | ELetrec (f, x, e1, e2) ->
     "let rec " ^ f ^ " " ^ x ^ " = " ^ lin_exp e1 ^ " in " ^ lin_exp e2
   | e -> lin_cexp e
 and lin_cexp e = match e with
@@ -235,13 +235,13 @@ and lin_cexp e = match e with
     lin_sexp e1 ^ " <= " ^ lin_sexp e2
   | e -> lin_sexp e
 and lin_sexp e = match e with
-  | EOapp(EAdd, e1, e2) ->
+  | EOapp (EAdd, e1, e2) ->
     lin_sexp e1 ^ " + " ^ lin_mexp e2
-  | EOapp(ESub, e1, e2) ->
+  | EOapp (ESub, e1, e2) ->
     lin_sexp e1 ^ " - " ^ lin_mexp e2
   | e -> lin_mexp e
 and lin_mexp e = match e with
-  | EOapp(EMul, e1, e2) ->
+  | EOapp (EMul, e1, e2) ->
     lin_mexp e1 ^ " * " ^ lin_aexp e2
   | e -> lin_aexp e
 and lin_aexp e = match e with
