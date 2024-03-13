@@ -3,4 +3,4 @@ let rec gpow k l =
     match k, l with
     | 0, _ -> [[]]
     | _, [] -> []
-    | k, x :: l -> gpow k l @ List.map (fun l -> x :: l) (gpow (k - 1) l)
+    | k, x :: l -> List.map (fun l -> x :: l) (gpow (k - 1) l) @ gpow k l 

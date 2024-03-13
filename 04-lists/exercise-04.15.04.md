@@ -11,7 +11,7 @@
 
 ---
 
-If $k = x$, then instead of directly returning $[x]$ we will now get the following trace:
+If `k = x`, then instead of directly returning `[x]` we will now get the following trace:
 ```text
   k :: prime_fac (x / k)
 =

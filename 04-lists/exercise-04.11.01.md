@@ -1,27 +1,14 @@
 # Exercise 4.11.1
 
-> Using $\mathit{fold}$, declare functions that yield the concatenation, the flattening, the length, and the reversal of lists.
+> Using `fold`, declare functions that yield the concatenation, the flattening, the length, and the reversal of lists.
 
 ---
 
 This has already been done in the book, on the same page as the exercise.
 We repeat the formulas for completeness:
-$$
-  \begin{aligned}
-    l_1 \mathbin{@} l_2
-    &=
-    \mathit{fold} \enspace \mathit{cons} \enspace l_1 \enspace l_2 \,,
-    \\
-    \mathbin{flatten} \enspace l
-    &=
-    \mathit{fold} \enspace ( \mathbin{@} ) \enspace l \enspace [\,] \,,
-    \\
-    \mathbin{length} \enspace l
-    &=
-    \mathit{fold} \enspace (\lambda x a. 1 + a) \enspace l \enspace 0 \,,
-    \\
-    \mathbin{rev} \enspace l
-    &=
-    \mathit{fold} \enspace (\lambda x a. a \mathbin{@} [x]) \enspace l \enspace [\,]
-  \end{aligned}
-$$
+```text
+  l1 @ l2 = fold cons l1 l2
+flatten l = fold ( @ ) l []
+ length l = fold (λ x a. 1 + a) l 0
+    rev l = fold (λ x a. a @ [x]) l []
+```

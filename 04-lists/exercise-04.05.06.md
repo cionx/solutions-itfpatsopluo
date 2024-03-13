@@ -1,25 +1,21 @@
 # Exercise 4.5.6 (Repeating lists)
 
 > A list is repeating if it has an element appearing at two different positions.
-> For instance, $[2, 5, 3, 5]$ is repeating and $[2, 5, 3]$ is not repeating.  
-> a) Declare a function testing whether a list is repeating.  
-> b) Declare a function testing whether a list is non-repeating.  
-> c) Declare a function that given a list $l$ yields a non-repeating list containing the same elements as $l$.
+> For instance, `[2, 5, 3, 5]` is repeating and `[2, 5, 3]` is not repeating.
+> 1. Declare a function testing whether a list is repeating.
+> 2. Declare a function testing whether a list is non-repeating.
+> 3. Declare a function that given a list `l` yields a non-repeating list containing the same elements as `l`.
 
 ---
 
-### a)
+### 1.
 
 We can iterate over the list, and check for each element if it reappears later on:
-$$
-  \begin{gathered}
-    \mathit{repeating} : \forall \alpha. \; \mathcal{L}(\alpha) \to \mathbb{B} \,, \\
-    \begin{aligned}
-      \mathit{repeating} \; [\,] &\coloneqq \mathsf{false} \,, \\
-      \mathit{repeating} \enspace (x :: l) &\coloneqq \mathit{mem} \enspace x \enspace l \mathbin{||} \mathit{repeating} \enspace l
-    \end{aligned}
-  \end{gathered}
-$$
+```text
+      repeating: ∀ α. L(α) → B
+      repeating [] := false
+repeating (x :: l) := mem x l || repeating l
+```
 In OCaml code:
 ```ocaml
 let rec repeating l =
@@ -28,33 +24,26 @@ let rec repeating l =
   | x :: t -> List.mem x t || repeating t
 ```
 
-### b)
+### 2.
 
-We can simply negate the result of $\mathit{repeating}$:
-$$
-  \mathit{nonrepeating} \enspace l
-  \coloneqq
-  \mathit{not} \enspace (\mathit{repeating} \enspace l)
-$$
+We can simply negate the result of `repeating`:
+```text
+nonrepeating l := not (repeating l)
+```
 In OCaml code:
 ```ocaml
 let nonrepeating l =
   not (repeating l)
 ```
 
-### c)
+### 3.
 
 We can declare this function as follows:
-$$
-  \begin{gathered}
-    \mathit{makeset} : \forall \alpha. \; \mathcal{L}(\alpha) \to \mathcal{L}(\alpha) \,, \\
-    \begin{aligned}
-      \mathit{makeset} \enspace [\,] \coloneqq{}& [\,] \,, \\
-      \mathit{makeset} \enspace (x :: l) \coloneqq{}& \text{with } l' \coloneqq \mathit{makeset} \enspace l, \\
-      {}&\text{if } \mathit{mem} \enspace x \enspace l' \text{ then } l' \text{ else } x :: l' \,.
-    \end{aligned}
-  \end{gathered}
-$$
+```text
+      makeset : ∀ α. L(α) → L(α)
+      makeset [] := []
+makeset (x :: l) := let l' = makeset l in if mem x l' then l' else x :: l
+```
 In OCaml code:
 ```ocaml
 let rec makeset l =

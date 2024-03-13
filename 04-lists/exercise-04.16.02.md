@@ -1,15 +1,14 @@
 # Exercise 4.16.2
 
-> Decide for each of the following equations whether it
-> is true in general.  
-> a) $\mathit{lookup} \enspace (\mathit{update} \enspace l \enspace a \enspace b) \enspace a = \mathsf{Some} \enspace b$  
-> b) $\mathit{lookup} \enspace (\mathit{update} \enspace l \enspace a' \enspace b) \enspace a = \mathit{lookup} \enspace l \enspace a$ if $a' \neq a$  
-> c) $\mathit{update} \enspace (\mathit{update} \enspace l \enspace a \enspace b) \enspace a' \enspace b' = \mathit{update} \enspace (\mathit{update} \enspace l \enspace a' \enspace b') \enspace a \enspace b$ if $a \neq a'$  
-> d) $\mathit{lookup} \enspace (\mathit{update} \enspace (\mathit{update} \enspace l \enspace a \enspace b) \enspace a' \enspace b') \enspace a = \mathsf{Some} \enspace b$ if $a \neq a'$
+> Decide for each of the following equations whether it is true in general.
+> 1. `lookup (update l a b) a = Some b`
+> 2. `lookup (update l a' b) a = lookup l a` if `a' <> a`
+> 3. `update (update l a b) a' b' = update (update l a' b') a b` if `a <> a'`
+> 4. `lookup (update (update l a b) a' b') a = Some b` if `a <> a'`
 
 ---
 
-### a)
+### 1.
 
 The equation is true:
 ```text
@@ -20,12 +19,12 @@ The equation is true:
   Some b
 ```
 
-### b)
+### 2.
 
 The equation is true.
 To see this, we distinguish between two cases:
 
-Case 1: $a$ already has a binding in $l$, say $(a, v)$.
+Case 1: `a` already has a binding in `l`, say `(a, v)`.
 ```text
   lookup (update l a' b) a
 =
@@ -40,7 +39,7 @@ Case 1: $a$ already has a binding in $l$, say $(a, v)$.
   lookup l a
 ```
 
-Case 2: $a$ has no binding in $l$.
+Case 2: `a` has no binding in `l`.
 ```text
   lookup (update l a' b) a
 =
@@ -51,7 +50,7 @@ Case 2: $a$ has no binding in $l$.
   lookup l a
 ```
 
-### c)
+### 3.
 
 The equation is false:
 As a counterexample, consider the following:
@@ -71,7 +70,7 @@ As a counterexample, consider the following:
 However, the two sides of the proposed equation are always equal up to permutation, and thus extensionally equal.
 
 
-### d)
+### 4.
 
 The equation is true:
 ```text

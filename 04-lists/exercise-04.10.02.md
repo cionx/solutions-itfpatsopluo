@@ -1,46 +1,38 @@
 # Exercise 4.10.2 (Prefixes, Segments, Suffixes)
 
-> Given a list $l = l_1 \mathbin{@} l_2 \mathbin{@} l_3$, we call $l_1$ a prefix, $l_2$ a segment, and $l_3$ a suffix of $l$.
+> Given a list `l = l1 @ l2 @ l3`, we call `l1` a prefix, `l2` a segment, and `l3` a suffix of `l`.
 > The definition is such that prefixes are segments starting at the beginning of a list, and suffixes are segments ending at the end of a list.
-> Moreover, every list is a prefix, segment, and suffix of itself.  
-> a) Convince yourself that segments are sublists.  
-> b) Give a list and a sublist that is not a segment of the list.  
-> c) Declare a function that yields a list containing all prefixes of a list.  
-> d) Declare a function that yields a list containing all suffixes of a list.  
-> e) Declare a function that yields a list containing all segments of a list.
+> Moreover, every list is a prefix, segment, and suffix of itself.
+> 1. Convince yourself that segments are sublists.
+> 2. Give a list and a sublist that is not a segment of the list.
+> 3. Declare a function that yields a list containing all prefixes of a list.
+> 4. Declare a function that yields a list containing all suffixes of a list.
+> 5. Declare a function that yields a list containing all segments of a list.
 
 ---
 
-### a)
+### 1.
 
 I have convinced myself.
 
-### b)
+### 2.
 
-We can consider the list $[1, 2, 3]$ and sublist $[1, 3]$.
+We can consider the list `[1, 2, 3]` and sublist `[1, 3]`.
 (This is the minimal counterexample.)
 
-### c)
+### 3.
 
 The only prefix of the empty list is the empty list.
-Every prefix of a nonempty list $x :: l$ is either
+Every prefix of a nonempty list `x :: l` is either
 - empty, or
-- of the form $x :: l'$ for a prefix $l'$ of $l$.
+- of the form `x :: l'` for a prefix `l'` of `l`.
 
 We thus arrive at the following declaration:
-$$
-  \begin{gathered}
-    \mathit{prefixes} : \forall \alpha. \; \mathcal{L}(\alpha) \to \mathcal{L}(\mathcal{L}(\alpha)) \,, \\
-    \begin{aligned}
-      \mathit{prefixes} \enspace [\,]
-      &\coloneqq
-      [[\,]] \,, \\
-      \mathit{prefixes} \enspace (x :: l)
-      &\coloneqq
-      [\,] :: \mathit{map} \enspace (\lambda p. x :: p) \enspace (\mathit{prefixes} \enspace l) \,.
-    \end{aligned}
-  \end{gathered}
-$$
+```text
+      prefixes : ∀ α. L(α) → L(L(α))
+      prefixes [] := [[]]
+prefixes (x :: l) := [] :: map (λ p. x :: p) (prefixes l)
+```
 In OCaml code:
 ```ocaml
 let rec prefixes l =
@@ -49,27 +41,19 @@ let rec prefixes l =
   | x :: l -> [] :: List.map (fun p -> x :: p) (prefixes l)
 ```
 
-### d)
+### 4.
 
 The only suffix of the empty list is the empty list itself.
-The suffixes of a nonempty list $x :: l$ are
+The suffixes of a nonempty list `x :: l` are
 - the entire list, and
-- the suffixes of $l$.
+- the suffixes of `l`.
 
 We thus arrive at the following declaration:
-$$
-  \begin{gathered}
-    \mathit{suffixes} : \forall \alpha. \; \mathcal{L}(\alpha) \to \mathcal{L}(\mathcal{L}(\alpha)) \,, \\
-    \begin{aligned}
-      \mathit{suffixes} \enspace [\,]
-      &\coloneqq
-      [[\,]] \,, \\
-      \mathit{suffixes} \enspace (x :: l)
-      &\coloneqq
-      (x :: l) :: \mathit{suffixes} \enspace l \,.
-    \end{aligned}
-  \end{gathered}
-$$
+```text
+      suffixes : ∀ α. L(α) → L(L(α))
+      suffixes [] := [[]]
+suffixes (x :: l) := (x :: l) :: suffixes l
+```
 In OCaml code:
 ```ocaml
 let rec suffixes l =
@@ -78,29 +62,19 @@ let rec suffixes l =
   | x :: l' -> l :: suffixes l'
 ```
 
-### e)
+### 5.
 
 The only segment of the empty list is the empty list itself.
-The segments of a non-empty list $x :: l$ are precisely
-- the segments of $l$, and
-- the nonempty prefixes of $x :: l$, i.e., those prefixes of the form $x :: l'$ for a prefix $l'$ of $l$.
+The segments of a non-empty list `x :: l` are precisely
+- the segments of `l`, and
+- the nonempty prefixes of `x :: l`, i.e., those prefixes of the form `x :: l'` for a prefix `l'` of `l`.
 
 Based on these observations we declare the desired function as follows:
-$$
-  \begin{gathered}
-    \mathit{segments} : \forall \alpha. \; \mathcal{L}(\alpha) \to \mathcal{L}(\mathcal{L}(\alpha)) \,, \\
-    \begin{aligned}
-      \mathit{segments} \enspace [\,]
-      &\coloneqq
-      [[\,]] \,, \\
-      \mathit{segments} \enspace (x :: l)
-      &\coloneqq
-      \mathit{map} \enspace (\lambda l'. x :: l') \enspace (\mathit{prefixes} \enspace l)
-      \enspace\mathbin{@}\enspace
-      \mathit{segments} \enspace l \,.
-    \end{aligned}
-  \end{gathered}
-$$
+```text
+      segments : ∀ α. L(α) → L(L(α))
+      segments [] := [[]]
+segments (x :: l) := map (λ p. x :: p) (prefixes l) @ segments l
+```
 In OCaml code:
 ```ocaml
 let rec segments l =

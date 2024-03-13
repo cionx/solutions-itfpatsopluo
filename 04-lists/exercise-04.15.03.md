@@ -1,10 +1,10 @@
 # Exercise 4.15.3
 
-> Declare a primality test using at most $\sqrt[2]{x}$ remainder operations for an argument $x \geq 2$.
+> Declare a primality test using at most `√x` remainder operations for an argument `x >= 2`.
 
 ---
 
-We test that no number $k = 2, 3, \dotsc$ with $k \leq \sqrt[2]{x}$ is a divisor of $x$.
+We test that no number `k = 2, 3, ...` with `k <= √x` is a divisor of `x`.
 In OCaml code:
 ```ocaml
 let rec prime' k x =

@@ -1,7 +1,7 @@
 # Exercise 4.7.4
 
-> Declare a function $\mathit{find} : \forall \alpha. \; \alpha \to \mathcal{L}(\alpha) \to \mathbb{N}$ that returns the first position of a list a given value appears at.
-> For instance, we want $\mathit{find} \enspace 1 \enspace [3, 1, 1] = 1$.
+> Declare a function `find : ∀ α. α → L(α) → N` that returns the first position of a list a given value appears at.
+> For instance, we want `find 1 [3, 1, 1] = 1`.
 > If the value doesn’t appear in the list, a failure exception should be raised.
 
 ---

@@ -1,6 +1,6 @@
 # Exercise 4.3.1
 
-> Declare a function $\mathit{seq}$ following the mathematical definition in the previous section.
+> Declare a function `seq` following the mathematical definition in the previous section.
 
 ---
 

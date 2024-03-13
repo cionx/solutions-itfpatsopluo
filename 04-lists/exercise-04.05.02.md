@@ -4,4 +4,4 @@
 
 ---
 
-I’ve convinced myself of such.
+I’ve convinced myself.

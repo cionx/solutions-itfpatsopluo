@@ -1,41 +1,24 @@
 # Exercise 4.12.4 (Sorting with duplicate deletion)
 
-> Declare a function $\mathit{dsort} : \forall \alpha. \; \mathcal{L}(\alpha) \to \mathcal{L}(\alpha)$ that sorts a list and removes all duplicates.
-> For instance, $\mathit{dsort} \enspace [5, 3, 2, 5, 2, 3] = [2, 3, 5]$.
+> Declare a function `dsort : ∀ α. L(α) → L(α)` that sorts a list and removes all duplicates.
+> For instance, `dsort [5, 3, 2, 5, 2, 3] = [2, 3, 5]`.
 
 ---
 
-We first sort the list and then remove duplicates:
-$$
-  \begin{gathered}
-    \mathit{rm\_dup} : \forall \alpha. \; \mathcal{L}(\alpha) \to \mathcal{L}(\alpha) \,, \\
-    \begin{aligned}
-      \mathit{rm\_dup} \enspace [\,]
-      &\coloneqq
-      [\,] \,,
-      \\
-      \mathit{rm\_dup} \enspace [x]
-      &\coloneqq
-      [x] \,,
-      \\
-      \mathit{rm\_dup} \enspace x :: y :: l
-      &\coloneqq
-      \text{if } x = y \text{ then } \mathit{rm\_dup} \enspace (y :: l) \text{ else } x ::\mathit{rm\_dup} \enspace (y :: l)\,,
-    \end{aligned}
-  \end{gathered}
-$$
+We first sort the list and then remove duplicates with the following function:
+```text
+           rm_dup : ∀ α. L(α) → L(α)
+           rm_dup [] := []
+          rm_dup [x] := [x]
+rm_dup (x :: y :: l) := if x = y then rm_dup (y :: l) else x :: rm_dup (y :: l)
+```
 More explicitly, this function collapses segments of equal elements into a single element.
 
-We can now declare $\mathit{dsort}$:
-$$
-  \begin{gathered}
-    \mathit{dsort} : \forall \alpha. \; \mathcal{L}(\alpha) \to \mathcal{L}(\alpha) \,, \\
-      \mathit{dsort} \enspace l
-      \coloneqq
-      \mathit{rm\_dup} \enspace (\mathit{isort} \enspace l) \,.
-  \end{gathered}
-$$
-
+We can now declare `dsort`:
+```text
+dsort : ∀ α. L(α) → L(α)
+dsort l := rm_dup (isort l)
+```
 In OCaml code:
 ```ocaml
 let rec rm_dup l =

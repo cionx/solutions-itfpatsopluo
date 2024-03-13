@@ -1,15 +1,15 @@
 # Exercise 4.3.2 (Init)
 
-> Declare a polymorphic function $\mathit{init}$ such that $\mathit{init} \; n \; f = [f(0), \dotsc , f(n − 1)]$ for $n \geq 0$.
-> Note that $n$ is the length of the result list.
+> Declare a polymorphic function `init` such that `init n f = [f(0), ..., f(n − 1)]` for `n >= 0`.
+> Note that `n` is the length of the result list.
 > Write your function with a tail-recursive helper function.
-> Make sure your function agrees with OCaml’s predefined function $\mathit{List.init}$.
-> Use $\mathit{List.init}$ to declare polymorphic functions that yield lists
-> $[f(m), f(m + 1), \dotsc , f(m + n − 1)]$ and $[f(m), f(m + 1), \dotsc , f(n)$].
+> Make sure your function agrees with OCaml’s predefined function `List.init`.
+> Use `List.init` to declare polymorphic functions that yield lists
+> `[f(m), f(m + 1), ..., f(m + n − 1)]` and `[f(m), f(m + 1), ..., f(n)]`.
 
 ---
 
-We can declare $\mathit{init}$ as follows:
+We can declare `init` as follows:
 ```ocaml
 let rec init_aux n f acc =
   if n < 0 then acc

@@ -1,20 +1,16 @@
 # Exercise 4.6.1
 
-> Define a polymorphic function $\mathit{tl} : \forall \alpha. \; \mathcal{L}(\alpha) \to \mathcal{L}(\alpha)$ returning the tail of nonempty lists.
+> Define a polymorphic function `tl : ∀ α. L(α) → L(α)` returning the tail of nonempty lists.
 > Do not use exceptions.
 
 ---
 
 We simply choose the tail of the empty list as empty:
-$$
-  \begin{gathered}
-    \mathit{tl} : \forall \alpha. \; \mathcal{L}(\alpha) \to \mathcal{L}(\alpha) \,, \\
-    \begin{aligned}
-      \mathit{tl} \enspace [\,] &\coloneqq [\,] \,, \\
-      \mathit{tl} \enspace (x :: l) &\coloneqq l \,.
-    \end{aligned}
-  \end{gathered}
-$$
+```text
+tl : ∀ α. L(α) → L(α)
+      tl [] := []
+tl (x :: l) := l
+```
 In OCaml code:
 ```ocaml
 let tl l =

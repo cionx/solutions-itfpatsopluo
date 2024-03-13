@@ -1,13 +1,13 @@
 # Exercise 4.15.1
 
-> Give traces for the following applications:  
-> a) $\mathit{prime\_fac}' \enspace 2 \enspace 7$  
-> b) $\mathit{prime\_fac}' \enspace 2 \enspace 8$  
-> c) $\mathit{prime\_fac}' \enspace 2 \enspace 15$
+> Give traces for the following applications:
+> 1. `prime_fac' 2 7`
+> 2. `prime_fac' 2 8`
+> 3. `prime_fac' 2 15`
 
 ---
 
-### a)
+### 1.
 
 We have the following trace:
 ```text
@@ -18,7 +18,7 @@ We have the following trace:
   [7]
 ```
 
-### b)
+### 2.
 
 We have the following trace:
 ```text
@@ -35,7 +35,7 @@ We have the following trace:
   [2; 2; 2]
 ```
 
-### c)
+### 3.
 
 We have the following trace:
 ```text

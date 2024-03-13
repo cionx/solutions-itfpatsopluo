@@ -13,7 +13,7 @@ let rec lookup m a =
 let rec bound m a =
   match m with
   | [] -> false
-  | (a', _) :: m' -> a = a' || bound m' a
+  | (a', _) :: m -> a = a' || bound m a
 
 let bound m a =
   match lookup m a with

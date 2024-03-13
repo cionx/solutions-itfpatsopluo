@@ -1,11 +1,11 @@
 # Exercise 4.15.2
 
-> Declare a function that yields the least prime factor of an integer $x \geq 2$.
-> Make sure that at most $\sqrt[2]{x}$ remainder operations are necessary.
+> Declare a function that yields the least prime factor of an integer `x >= 2`.
+> Make sure that at most `√x` remainder operations are necessary.
 
 ---
 
-We are search for the first divisor of $x$ that is larger or equal to $2$.
+We search for the first divisor of `x` that is larger or equal to `2`.
 In OCaml code:
 ```ocaml
 let rec least_prime_factor' k x =

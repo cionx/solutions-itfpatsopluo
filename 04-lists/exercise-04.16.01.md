@@ -1,13 +1,13 @@
 # Exercise 4.16.1
 
-> Give the values of the following expressions:  
-> a) $\mathit{update} \enspace (\mathit{update} \enspace (\mathit{update} \enspace [\,] \enspace \mathtt{"x"} \enspace 7) \enspace \mathtt{"y"} \enspace 2) \enspace \mathtt{"z"} \enspace 5$  
-> b) $\mathit{lookup} \enspace (\mathit{update} \enspace l \enspace \mathtt{"x"} \enspace 13) \enspace \mathtt{"x"}$  
-> c) $\mathit{lookup} \enspace (\mathit{update} \enspace l \enspace a \enspace 7) \enspace a$
+> Give the values of the following expressions:
+> 1. `update (update (update [] "x" 7) "y" 2) "z" 5`
+> 2. `lookup (update l "x" 13) "x"`
+> 3. `lookup (update l a 7) a`
 
 ---
 
-### a)
+### 1.
 
 The expression evaluates as follows:
 ```text
@@ -20,7 +20,7 @@ The expression evaluates as follows:
   [("x", 7); ("y", 2); ("z", 5)]
 ```
 
-### b)
+### 2.
 
 The expression evaluates as follows:
 ```text
@@ -31,7 +31,7 @@ The expression evaluates as follows:
   Some 13
 ```
 
-### c)
+### 3.
 
 The expression evaluates as follows:
 ```text

@@ -1,6 +1,6 @@
 # Exercise 4.6.2
 
-> Declare a polymorphic function $\mathit{last} : \forall \alpha. \; \mathcal{L}(\alpha) \to \alpha$ returning the last element of a nonempty lists.
+> Declare a polymorphic function `last : ∀ α. L(α) → α` returning the last element of a nonempty lists.
 
 ---
 

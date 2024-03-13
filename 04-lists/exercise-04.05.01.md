@@ -1,11 +1,11 @@
 # Exercise 4.5.1
 
-> Declare $\mathit{mem}$ and $\mathit{exists}$ in OCaml.
-> For $\mathit{mem}$ consider two possibilities, one with $\mathit{exists}$ and one without helper function.
+> Declare `mem` and `exists` in OCaml.
+> For `mem` consider two possibilities, one with `exists` and one without helper function.
 
 ---
 
-We can declare $\mathit{mem}$ as follows:
+We can declare `mem` as follows:
 ```ocaml
 let rec mem x l =
   match l with
@@ -13,7 +13,7 @@ let rec mem x l =
   | h :: t -> x = h || mem x t
 ```
 
-We can declare $\mathit{exists}$ as follows:
+We can declare `exists` as follows:
 ```ocaml
 let rec exists p l =
   match l with
@@ -21,7 +21,7 @@ let rec exists p l =
   | h :: t -> p h || exists p t
 ```
 
-We can now re-declare $\mathit{mem}$ in terms of $\mathit{exists}$:
+We can now re-declare `mem` in terms of `exists`:
 ```ocaml
 let mem x l =
   exists (( = ) x) l

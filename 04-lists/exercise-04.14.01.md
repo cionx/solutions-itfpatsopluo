@@ -1,40 +1,34 @@
 # Exercise 4.14.1 (Lexical order for pairs)
 
 > The idea of lexical order extends to pairs and to tuples in general.  
-> a) Explain the lexical order of pairs of type $t_1 \times t_2$ given orders for the component types $t_1$ and $t_2$.  
-> b) Declare a function
-> $$
->   \mathit{lexP} : \forall \alpha \beta. (\alpha \to \alpha \to \mathbb{B}) \to (\beta \to \beta \to \mathbb{B}) \to \alpha \times \beta \to \alpha \times \beta \to \mathbb{B}
-> $$
-> testing the lexical order of pairs. For instance, we want
-> $$
->   \mathit{lexP} \enspace ( ≤ ) \enspace ( ≥ ) \enspace (1, 2) \enspace (1, 3) = \mathsf{false}
-> $$
-> and $\mathit{lexP} \enspace ( ≤ ) \enspace ( ≥ ) \enspace (0, 2) \enspace (1, 3) = \mathsf{true}$.
+> 1. Explain the lexical order of pairs of type `t1 × t2` given orders for the component types `t1` and `t2`.
+> 2. Declare a function
+>    ```text
+>    lexP : ∀ α β. (α → α → B) → (β → β → B) → α × β → α × β → B
+>    ```
+>    testing the lexical order of pairs.
+>    For instance, we want
+>    ```text
+>    lexP ( <= ) ( >= ) (1, 2) (1, 3) = false
+>    ```
+>    and `lexP ( ≤ ) ( ≥ ) (0, 2) (1, 3) = true`.
 
 ---
 
-### a)
+### 1.
 
-We have $(x_1, x_2) < (y_1, y_2)$ if
+We have `(x1, x2) < (y1, y2)` if
 
-- $x_1 < y_1$ or
-- $x_1 = y_1$ and $x_2 < y_2$.
+- `x1 < y1` or
+- `x1 = y1` and `x2 < y2`.
 
-### b)
+### 2.
 
-We can declare the function $\mathit{lexP}$ as follows:
-$$
-  \begin{gathered}
-    \mathit{lexP} : \forall \alpha \beta. (\alpha \to \alpha \to \mathbb{B}) \to (\beta \to \beta \to \mathbb{B}) \to \alpha \times \beta \to \alpha \times \beta \to \mathbb{B} \,, \\
-    \mathit{lexP} \enspace p \enspace q \enspace x \enspace y
-    \coloneqq
-    p \; (\pi_1 x) \; (\pi_1 y)
-    \mathbin{\mathtt{\&\&}}
-    \text{if } p \; (\pi_1 y) \; (\pi_1 x) \text{ then } q \; (\pi_2 x) \; (\pi_2 y) \text{ else } \mathsf{true}
-  \end{gathered}
-$$
-
+We can declare the function `lexP` as follows:
+```text
+        lexP : ∀ α β. (α → α → B) → (β → β → B) → α × β → α × β → B
+lexP p q x y := p (π1 x) (π1 y) && (if p (π1 y) (π1 x) then q (π2 x) (π2 y) else true)
+```
 In OCaml code:
 ```ocaml
 let lexP p q (x1, x2) (y1, y2) =

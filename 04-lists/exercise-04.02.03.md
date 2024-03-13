@@ -1,38 +1,38 @@
 # Exercise 4.2.3
 Decide for each of the following equations whether it is well-typed, and, in case it is well-typed, whether it is true.
-Assume $l_1, l_2 : \mathcal{L}(N)$.  
-a) $1 :: 2 :: 3 = 1 :: [2, 3]$  
-b) $1 :: 2 :: 3 :: [] = 1 :: (2 :: [3])$  
-c) $l_1 :: [2] = l_1 \mathbin{@} [2]$  
-d) $(l_1 \mathbin{@} [2]) \mathbin{@} l_2 = l_1 \mathbin{@} (2 :: l_2)$  
-e) $(l_1 :: 2) \mathbin{@} l_2 = l_1 \mathbin{@} (2 :: l_2)$  
-f) $\mathit{map} \; (\lambda x. x^2) \;[1, 2, 3] = [1, 4, 9]$  
-g) $\mathit{rev} \; (l_1 \mathbin{@} l_2) = \mathit{rev} \enspace l_2 \mathbin{@} \mathit{rev} \enspace l_1$
+Assume `l1, l2 : L(N)`.
+1. `1 :: 2 :: 3 = 1 :: [2, 3]`
+2. `1 :: 2 :: 3 :: [] = 1 :: (2 :: [3])`
+3. `l1 :: [2] = l1 @ [2]`
+4. `(l1 @ [2]) @ l2 = l1 @ (2 :: l2)`
+5. `(l1 :: 2) @ l2 = l1 @ (2 :: l2)`
+6. `map (λ x. x^2) [1, 2, 3] = [1, 4, 9]`
+7. `rev (l1 @ l2) = rev l2 @ rev l1`
 
-### a)
+### 1.
 
-The expression $1 :: 2 :: 3$ is not well-typed because $3$ is not a list.
+The expression `1 :: 2 :: 3` is not well-typed because `3` is not a list.
 
-### b)
+### 2.
 
-This equation is true, and both sides have type $\mathcal{L}(\mathbb{N})$.
+This equation is true, and both sides have type `L(N)`.
 
-### c)
+### 3.
 
-The expression $l_1 :: [2]$ is not well-defined because $l_1$ and $2$ have different types.
+The expression `l1 :: [2]` is not well-defined because `l1` and `2` have different types.
 
-### d)
+### 4.
 
-This equation is true, and both sides have type $\mathcal{L}(\mathbb{N})$.
+This equation is true, and both sides have type `L(N)`.
 
-### e)
+### 5.
 
-The subexpression $l_1 :: 2$ is not well-typed because $2$ is not a list.
+The subexpression `l1 :: 2` is not well-typed because `2` is not a list.
 
-### f)
+### 6.
 
-This equation is true, and both sides have type $\mathcal{L}(\mathbb{N})$.
+This equation is true, and both sides have type `L(N)`.
 
-### g)
+### 7.
 
-The equation is true, and both sides have type $\mathcal{L}(\mathbb{N})$.
+The equation is true, and both sides have type `L(N)`.

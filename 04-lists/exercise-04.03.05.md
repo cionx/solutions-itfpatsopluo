@@ -1,19 +1,15 @@
 # Exercise 4.3.5
 
 > Declare functions
-> $$
->   \begin{aligned}
->     \mathit{zip}   &: \forall \alpha \beta. \; \mathcal{L}(\alpha) \to \mathcal{L}(\beta) \to \mathcal{L}(\alpha \times \beta) \,, \\
->     \mathit{unzip} &: \forall \alpha \beta. \; \mathcal{L}(\alpha \times \beta) \to \mathcal{L}(\alpha) \times \mathcal{L}(\beta) \,,
->   \end{aligned}
-> $$
+> ```text
+>   zip : ∀ α β. L(α) → L(β) → L(α × β)
+> unzip : ∀ α β. L(α × β) → L(α) × L(β)
+> ```
 > such that
-> $$
->   \begin{aligned}
->     \mathit{zip} \; [x_1, \dotsc, x_n ] \; [y_1, \dotsc, y_n ] &= [(x_1, y_1 ), \dotsc, (x_n, y_n )] \,, \\
->     \mathit{unzip} \; [(x_1, y_1), \dotsc, (x_n, y_n)] &= ([x_1, \dotsc, x_n], [y_1, \dotsc, y_n]) \,.
->   \end{aligned}
-> $$
+> ```text
+>   zip [x1, ..., xn] [y1, ..., yn] = [(x1, y1), ..., (xn, yn)]
+> unzip [(x1, y1), ..., (xn, yn)] = ([x1, ..., xn], [y1, ..., yn])
+> ```
 
 ---
 

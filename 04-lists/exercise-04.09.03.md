@@ -5,7 +5,7 @@
 
 ---
 
-We use an auxiliary function $\mathit{maximum}'$ that keeps track of the largest element we have encountered so far.
+We use an auxiliary function `maximum'` that keeps track of the largest element we have encountered so far.
 ```ocaml
 let rec maximum' l m =
   match l with
