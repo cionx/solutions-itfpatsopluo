@@ -1,19 +1,19 @@
 # Exercise 2.2.2
 
 > Draw syntax trees for the following phrases:
-> a) `x + 3 · f(x) − 4`
-> b) `1 + (2 + (3 + 4))`
-> c) `1 + 2 + 3 + 4`
-> d) `1 + (2 + 3) + 4`
-> e) `1 + 2 · x − y · 3 + 4`
-> f) `(1 + 2) · x − (y · 3) + 4`
-> g) `if x < 3 then 3 else p(3)`
-> h) `let x = 2 + y in x − y`
-> i) `let p x n = if n > 0 then x · p x (n − 1) else 1 in p 2 10`
+> 1. `x + 3 · f(x) − 4`
+> 2. `1 + (2 + (3 + 4))`
+> 3. `1 + 2 + 3 + 4`
+> 4. `1 + (2 + 3) + 4`
+> 5. `1 + 2 · x − y · 3 + 4`
+> 6. `(1 + 2) · x − (y · 3) + 4`
+> 7. `if x < 3 then 3 else p(3)`
+> 8. `let x = 2 + y in x − y`
+> 9. `let p x n = if n > 0 then x · p x (n − 1) else 1 in p 2 10`
 
 ---
 
-### a)
+### 1.
 
 The expression `x + 3 · f(x) − 4` is implicitly parenthesized as `(x + 3 · f(x)) − 4`.
 We therefore get the following syntax tree:
@@ -33,7 +33,7 @@ x     *
       f     x
 ```
 
-### b)
+### 2.
 
 The expression `1 + (2 + (3 + 4))` has the following syntax tree:
 ```text
@@ -49,7 +49,7 @@ The expression `1 + (2 + (3 + 4))` has the following syntax tree:
       3     4
 ```
 
-### c)
+### 3.
 
 The expression `1 + 2 + 3 + 4` is implicitly parenthesized as `((1 + 2) + 3) + 4`.
 Its syntax tree is therefore as follows:
@@ -66,7 +66,7 @@ Its syntax tree is therefore as follows:
 1     2
 ```
 
-### d)
+### 4.
 
 The expression `1 + (2 + 3) + 4` is implicitly parenthesized as `(1 + (2 + 3)) + 4`.
 Its syntax tree is therefore as follows:
@@ -83,7 +83,7 @@ Its syntax tree is therefore as follows:
    2     3
 ```
 
-### e)
+### 5.
 
 The expression `1 + 2 · x − y · 3 + 4` is implicitly parenthesized as `((1 + 2 ⋅ x) - y ⋅ 3) + 4`.
 Its syntax tree is therefore as follows:
@@ -105,7 +105,7 @@ Its syntax tree is therefore as follows:
    2     x
 ```
 
-### f)
+### 6.
 
 The expression `(1 + 2) · x − (y · 3) + 4` is implicitly parenthesized as `((1 + 2) · x − (y · 3)) + 4`.
 Its syntax tree is therefore as follows:
@@ -127,7 +127,7 @@ Its syntax tree is therefore as follows:
 1     2
 ```
 
-### g)
+### 7.
 
 The expression `if x < 3 then 3 else p(3)` has the following syntax tree:
 ```text
@@ -141,7 +141,7 @@ The expression `if x < 3 then 3 else p(3)` has the following syntax tree:
 x     3   p     3
 ```
 
-### h)
+### 8.
 
 The expression `let x = 2 + y in x − y` has the following syntax tree:
 ```text
@@ -160,7 +160,8 @@ pattern  |     \
 ```
 
 
-### i)
+### 9.
+
 The expression `let p x n = if n > 0 then x · p x (n − 1) else 1 in p 2 10` has the following syntax tree
 ```text
     ┌------------- let ---------------┐

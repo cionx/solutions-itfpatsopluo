@@ -1,43 +1,43 @@
 # Exercise 2.9.3 (Recursive lambda expressions)
 
-> We may extend our language with recursive lambda expressions $\rho f x. e$ describing a recursive function with a local variable $f$ serving as function name.
-> Note that the Greek letter $\rho$ takes the place of the Greek letter $\lambda$.  
-> a) Explain recursive lambda expressions $\rho f x. e$ as derived form.  
-> b) Give a typing rule for recursive lambda expressions $\rho f x. e$ assuming they are abstract expressions.  
-> c) Give an evaluation rule for recursive lambda expressions $\rho f x. e$ assuming they are abstract expressions.
+> We may extend our language with recursive lambda expressions `ρ f x. e` describing a recursive function with a local variable `f` serving as function name.
+> Note that the Greek letter `ρ` takes the place of the Greek letter `λ`.
+> 1. Explain recursive lambda expressions `ρ f x. e` as derived form.
+> 2. Give a typing rule for recursive lambda expressions `ρ f x. e` assuming they are abstract expressions.
+> 3. Give an evaluation rule for recursive lambda expressions `ρ f x. e` assuming they are abstract expressions.
 
 ---
 
 
 
-### a)
+### 1.
 
-We can express $\rho f x. e$ as follows:
-$$
-  \text{let rec } f \; x = e \text{ in } f \,.
-$$
+We can express `ρ f x. e` as follows:
+``
+let rec f x = e in f
+``
 
 
 
-### b)
+### 2.
 
 We have two approaches:
 
 #### First approach
 
-We have the following typing rule for $\text{let rec}$ expressions:
+We have the following typing rule for `let rec` expressions:
 ```text
 E, f : t1 → t2, x : t1  ⊢  e1 : t2     E, f : t1 → t2  ⊢  e2 : t
 ----------------------------------------------------------------
                 E  ⊢  let rec f x = e1 in e2 : t
 ```
-Motivated by part a) of this exercise we consider the following derived typing rule (we replace $e_1$ with $e$ end $e_2$ with $f$):
+Motivated by part 1 of this exercise we consider the following derived typing rule (we replace `e1` with `e` end `e2` with `f`):
 ```text
 E, f : t1 → t2, x : t1  ⊢  e : t2     E, f : t1 → t2  ⊢  f : t
 --------------------------------------------------------------
                 E  ⊢  let rec f x = e in f : t
 ```
-The condition $E, f : t_1 → t_2 \vdash f : t$ gives $t = t_1 \to t_2$, whence we can simplify the above typing rule as follows:
+The condition `E, f : t1 → t2 ⊢ f : t` gives `t = t1 → t2`, whence we can simplify the above typing rule as follows:
 ```text
  E, f : t1 → t2, x : t1  ⊢  e : t2
 ------------------------------------
@@ -59,7 +59,7 @@ The typing rule for non-recursive lambda expressions is as follows:
 E  ⊢  λ x. e : t1 → t2
 ```
 
-In the recursive case we also need to consider that $f$ may appear in $e$, leading to the following modified typing rule:
+In the recursive case we also need to consider that `f` may appear in `e`, leading to the following modified typing rule:
 ```text
 E, f : t1 → t2, x : t1  ⊢  e : t2
 ---------------------------------
@@ -68,7 +68,7 @@ E, f : t1 → t2, x : t1  ⊢  e : t2
 
 
 
-### c)
+### 3.
 
 A recursive lambda expression evaluates to a closure for recursive functions:
 ```text

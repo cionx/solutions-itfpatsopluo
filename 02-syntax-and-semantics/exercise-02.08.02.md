@@ -2,7 +2,7 @@
 
 > Give evaluation rules for declarations and programs.
 > Hint:
-> Use judgments $V \vdash D \Rightarrow V'$ and $V \vdash P \Rightarrow V'$ and model programs with the grammar $P \Coloneqq \emptyset \mid D P$ ($\emptyset$ is the empty program).
+> Use judgments `V ⊢ D => V'` and `V ⊢ P => V'` and model programs with the grammar `P ::= ∅ | D P` (`∅` is the empty program).
 
 ---
 

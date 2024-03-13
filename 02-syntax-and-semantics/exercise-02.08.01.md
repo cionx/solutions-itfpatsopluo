@@ -1,20 +1,20 @@
 # Exercise 2.8.1
 
-> For the following expressions $e$ find values $v$ such that $[] \vdash e \triangleright v$ is derivable.
+> For the following expressions `e` find values `v` such that `[] \vdash e \triangleright v` is derivable.
 > Draw the derivations.  
-> a) $(\lambda x. x) \enspace 1$  
-> b) $(\lambda x. \lambda y. x) \enspace 1$  
-> c) $(\lambda f. \lambda x. f x) (\lambda x. x)$  
-> d) $\text{let rec } f \; x = x \text{ in } f$  
-> e) $(\lambda y. \text{ let rec } f \; x = x \text{ in } f ) \enspace 5$
+> 1. `(λ x. x) 1`  
+> 2. `(λ x. λ y. x) 1`  
+> 3. `(λ f. λ x. f x) (λ x. x)`  
+> 4. `let rec f x = x in f`  
+> 5. `(λ y. let rec f x = x in f ) 5`
 
 ---
 
 
 
-### a)
+### 1.
 
-We have the following derivation for the expression $(\lambda x. x) \enspace 1$:
+We have the following derivation for the expression `(λ x. x) 1`:
 ```text
 ----------------------------     --------------     -----------------
 []  ⊢  λ x. x  ⊳  (x, x, [])     []  ⊢  1  ⊳  1     x ⊳ 1  ⊢  x  ⊳  1
@@ -30,9 +30,9 @@ We can verify our result with utop:
 
 
 
-### b)
+### 2.
 
-We have the following derivation for the expression $(\lambda x. \lambda y. x) \enspace 1$:
+We have the following derivation for the expression `(λ x. λ y. x) 1`:
 ```text
 --------------------------------------     --------------     ------------------------------------
 []  ⊢  λ x. λ y. x  ⊳  (x, λ y. x, [])     []  ⊢  1  ⊳  1     x ⊳ 1  ⊢  λ y. x  ⊳  (y, x, [x ⊳ 1])
@@ -42,9 +42,9 @@ We have the following derivation for the expression $(\lambda x. \lambda y. x) \
 
 
 
-### c)
+### 3.
 
-We have the following derivation for $(\lambda f. \lambda x. f x) (\lambda x. x)$:
+We have the following derivation for `(λ f. λ x. f x) (λ x. x)`:
 ```text
 ------------------------------------------     ----------------------------     ----------------------------------------------------------
 []  ⊢  λ f. λ x. f x  ⊳  (f, λ x. f x, [])     []  ⊢  λ x. x  ⊳  (x, x, [])     f ⊳ (x, x, [])  ⊢  λ x. f x  ⊳  (x, f x, [f ⊳ (x, x, [])])
@@ -54,9 +54,9 @@ We have the following derivation for $(\lambda f. \lambda x. f x) (\lambda x. x)
 
 
 
-### d)
+### 4.
 
-We have the following derivation for $\text{let rec } f \; x = x \text{ in } f$:
+We have the following derivation for `let rec f x = x in f`:
 ```text
   -----------------------------------------
   f ⊳ (f, x, x, [])  ⊢  f  ⊳  (f, x, x, [])
@@ -65,9 +65,9 @@ We have the following derivation for $\text{let rec } f \; x = x \text{ in } f$:
 ```
 
 
-### e)
+### 5.
 
-We have the following derivation for $(\lambda y. \text{ let rec } f \; x = x \text{ in } f ) \enspace 5$:
+We have the following derivation for `(λ y. let rec f x = x in f) 5`:
 ```text
                                                                                           y ⊳ 5, f ⊳ (f, x, x, [y ⊳ 5])  ⊢  f  ⊳  (f, x, x, [y ⊳ 5])
 ------------------------------------------------------------------     --------------     ----------------------------------------------------------

@@ -1,6 +1,6 @@
 # Exercise 2.6.4
 
-Test your understanding by giving typing rules for judgments $E \vdash e : t$ and expressions $e \Coloneqq x \mid \lambda x.e \mid ee$ without looking at Figure 2.2.
+Test your understanding by giving typing rules for judgments `E ⊢ e : t` and expressions `e ::= x | λ x. e | e e` without looking at Figure 2.2.
 
 ---
 

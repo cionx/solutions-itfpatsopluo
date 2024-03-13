@@ -2,16 +2,17 @@
 
 > Mark the words in the following character sequences.
 > For each word give the lexical class.  
-> a) `if x <= 1 then true else f (x+1)`  
-> b) `let rec f x : int = (*TODO*) +x`  
-> c) `let city = "Saarbrücken"in`  
-> d) `int * int -> bool`  
-> e) `if rec then <3`  
+> 1. `if x <= 1 then true else f (x+1)`  
+> 2. `let rec f x : int = (*TODO*) +x`  
+> 3. `let city = "Saarbrücken"in`  
+> 4. `int * int -> bool`  
+> 5. `if rec then <3`  
+>
 > Why does the character sequence `Saarbrücken` not represent a valid word?
 
 ---
 
-### a)
+### 1.
 
 ```text
 if x <= 1 then true else f (x+1)
@@ -33,7 +34,7 @@ l: integer literal
 m: keyword
 ```
 
-### b)
+### 2.
 
 ```text
 let rec f x : int = (*TODO*) +x
@@ -51,7 +52,7 @@ h: operator
 i: identifier
 ```
 
-### c)
+### 3.
 
 ```text
 let city = "Saarbrücken"in
@@ -65,7 +66,7 @@ d: string literal
 e: keyword
 ```
 
-### d)
+### 4.
 
 ```text
 int * int -> bool
@@ -79,7 +80,7 @@ d: keyword
 e: identifier
 ```
 
-### e)
+### 5.
 
 ```text
 if rec then <3

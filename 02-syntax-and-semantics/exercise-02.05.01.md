@@ -1,18 +1,18 @@
 # Exercise 2.5.1
 
-> For each of the following expressions $e$ construct a derivation $[] \vdash e : t$.
-> Use the placeholders $t_1$, $t_2$, $t_3$ for types to avoid unnecessary commitments to concrete types.
-> Try to give most general types.  
-> a) $\lambda x. x$  
-> b) $\lambda x y. x$  
-> c) $\lambda x x. x$  
-> d) $\lambda f g x. f x (g x)$  
-> e) $\text{let rec } f x = f x \text{ in } f$  
-> f) $\lambda x y z. \text{ if } x \text{ then } y \text{ else } z$
+> For each of the following expressions `e` construct a derivation `[] ⊢ e : t`.
+> Use the placeholders `t1`, `t2`, `t3` for types to avoid unnecessary commitments to concrete types.
+> Try to give most general types.
+> 1. `λ x. x`
+> 2. `λ x y. x`
+> 3. `λ x x. x`
+> 4. `λ f g x. f x (g x)`
+> 5. `let rec f x = f x in f`
+> 6. `λ x y z. if x then y else z`
 
 ---
 
-### a)
+### 1.
 
 We have the following type derivation:
 ```text
@@ -28,9 +28,9 @@ We can verify our result with utop:
 - : 'a -> 'a = <fun>
 ```
 
-### b)
+### 2.
 
-The expression $\lambda x y. x$ desugars to $\lambda x. \lambda y. x$.
+The expression `λ x y. x` desugars to `λ x. λ y. x`.
 It has the following type derivation:
 ```text
     -------------------------
@@ -47,9 +47,9 @@ We can verify our result with utop:
 - : 'a -> 'b -> 'a = <fun>
 ```
 
-### c)
+### 3.
 
-The expression $\lambda x x. x$ desugars to $\lambda x. \lambda x. x$.
+The expression `λ x x. x` desugars to `λ x. λ x. x`.
 It has the following type derivation:
 ```text
         -----------------
@@ -66,16 +66,16 @@ We can verify our result with utop:
 - : 'a -> 'b -> 'b = <fun>
 ```
 
-### d)
+### 4.
 
-The expression $\lambda f g x. f x (g x)$ desugars to $\lambda f. \lambda g. \lambda x. (f x) (g x)$.
+The expression `λ f g x. f x (g x)` desugars to `λ f. λ g. λ x. (f x) (g x)`.
 We observe that
-- if $x$ has type $t_1$,
-- then $g$ has type $t_1 \to t_2$,
-- then $f x$ has type $t_2 \to t_3$,
-- then $f$ has type $t_1 \to t_2 \to t_3$.
+- if `x` has type `t1`,
+- then `g` has type `t1 → t2`,
+- then `f x` has type `t2 → t3`,
+- then `f` has type `t1 → t2 → t3`.
 
-Let therefore $E$ be the environment $[ x : t_1, g : t_1 \to t_2, f : t_1 \to t_2 \to t_3 ]$.
+Let therefore `E` be the environment `[ x : t1, g : t1 → t2, f : t1 → t2 → t3 ]`.
 We have the following type derivation:
 ```text
 ----------------------     ------------     -----------------     ------------
@@ -100,9 +100,9 @@ We can verify our result with utop:
 - : ('a -> 'b -> 'c) -> ('a -> 'b) -> 'a -> 'c = <fun>
 ```
 
-### e)
+### 5.
 
-The expression $\text{let rec } f x = f x \text{ in } f$ has the following derivation, where $E$ denotes the environment $[f : t_1 \to t_2, x : t_1]$
+The expression `let rec f x = f x in f` has the following derivation, where `E` denotes the environment `[f : t1 → t2, x : t1]`
 ```text
 -----------------     ------------
 E  ⊢  f : t1 → t2     E  ⊢  x : t1
@@ -120,10 +120,10 @@ We can verify our result with utop:
 - : 'a -> 'b = <fun>
 ```
 
-### f)
+### 6.
 
-The expression $\lambda x y z. \text{ if } x \text{ then } y \text{ else } z$ desugars to $\lambda x. \lambda y. \lambda z. \text{ if } x \text{ then } y \text{ else } z$.
-It has the following type derivation, where $E$ denotes the environment $[x : \mathit{bool}, y : t, z : t]$:
+The expression `λ x y z. if x then y else z` desugars to `λ x. λ y. λ z. if x then y else z`.
+It has the following type derivation, where `E` denotes the environment `[x : bool, y : t, z : t]`:
 ```text
      --------------     -----------     -----------
      E  ⊢  x : bool     E  ⊢  y : t     E  ⊢  z : t

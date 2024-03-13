@@ -1,10 +1,10 @@
 # Exercise 2.3.2
 
-> Give two inference rules for judgments $x \mathbin{\dot{<}} y$ such that your rules derive the same judgments the rules given above derive, but have the additional property that no judgments has more than one derivation.
+> Give two inference rules for judgments `x < y` such that your rules derive the same judgments the rules given above derive, but have the additional property that no judgments has more than one derivation.
 
 ---
 
-(We once again use `<` for $\mathbin{\dot{<}}$.)
+(We once again use `<` for `<`.)
 
 We can use the following two inference rules:
 ```text
@@ -13,7 +13,7 @@ We can use the following two inference rules:
 x < x + 1          x < y + 1
 ```
 
-As an example, here is the unique derivation of $5 \mathbin{\dot{<}} 9$:
+As an example, here is the unique derivation of `5 < 9`:
 ```text
 -----
 5 < 6

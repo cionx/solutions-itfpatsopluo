@@ -1,12 +1,12 @@
 # Exercise 2.2.1
 
-> Draw syntax trees for the following phrases in lexical representation.  
-> a) $\mathit{int} \times \mathit{int} \to \mathit{bool}$  
-> b) $\mathit{int} \times (\mathit{int} \times \mathit{int}) \times \mathit{int} \to \mathit{bool}$
+> Draw syntax trees for the following phrases in lexical representation.
+> 1. `int × int → bool`
+> 2. `int × (int × int) × int → bool`
 
 ---
 
-### a)
+### 1.
 
 ```text
        →
@@ -18,7 +18,7 @@
 int   int   bool
 ```
 
-### b)
+### 2.
 
 ```text
         →
