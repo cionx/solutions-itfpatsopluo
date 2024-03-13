@@ -1,7 +1,7 @@
 # Exercise 8.5.1
 
 > The binary search function can be simplified if it returns booleans rather than options.
-> Declare a binary search function checking whether $f$ yields a given value for some number in a given interval.
+> Declare a binary search function checking whether `f` yields a given value for some number in a given interval.
 > Use the lazy boolean connectives.
 
 ---

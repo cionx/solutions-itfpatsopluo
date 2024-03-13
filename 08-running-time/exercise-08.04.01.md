@@ -1,6 +1,6 @@
 # Exercise 8.4.1
 
-> Check with an interpreter that the execution time of $\mathit{msort}$ is moderate even for lists of length $10^5$.
+> Check with an interpreter that the execution time of `msort` is moderate even for lists of length `10^5`.
 > Convince yourself that the ordering of the input list doesn’t matter.
 
 ---
@@ -44,7 +44,7 @@ let l_desc = List.rev l_asc
 let l_rand = rand_list len
 ```
 
-Sorting these lists with $\mathit{msort}$ takes the following amounts of time:
+Sorting these lists with `msort` takes the following amounts of time:
 ```ocaml
 # time msort l_asc;;
 - : float = 211.588888

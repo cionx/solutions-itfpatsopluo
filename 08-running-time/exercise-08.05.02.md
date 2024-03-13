@@ -1,18 +1,18 @@
 # Exercise 8.5.2
 
 > Binary search can be used for inversion of strictly increasing functions.
-> 1. Declare a function square deciding whether an integer $x \geq 0$ is a square number (that is, $x = n^2$ for some $n$).
->    The worst-case running time of $\mathit{square} \enspace x$ should be logarithmic in $x$.
-> 2. Declare a function $\mathit{sqrt}$ that given an integer $x \geq 0$ computes the largest $n$ such that $n^2 ≤ x$.
->    The worst-case running time of $\mathit{sqrt} \enspace x$ should be logarithmic in $x$.
-> 3. Declare a function $\mathit{inv}$ that given a strictly increasing function $f : \mathbb{N} \to \mathbb{N}$ and an integer $x \geq 0$ computes the largest $n$ such that $f(n) \leq x$.
->    The worst-case running time of $\mathit{inv} \enspace f \enspace x$ should be logarithmic in $x$ if $f$ has constant running time.
+> 1. Declare a function `square` deciding whether an integer `x >= 0` is a square number (that is, `x = n^2` for some `n`).
+>    The worst-case running time of `square x` should be logarithmic in `x`.
+> 2. Declare a function `sqrt` that given an integer `x >= 0` computes the largest `n` such that `n^2 <= x`.
+>    The worst-case running time of `sqrt x` should be logarithmic in `x`.
+> 3. Declare a function `inv` that given a strictly increasing function `f : N → N` and an integer `x >= 0` computes the largest `n` such that `f(n) <= x`.
+>    The worst-case running time of `inv f x` should be logarithmic in `x` if `f` has constant running time.
 
 ---
 
 ### 1.
 
-If $x = n^2$ for some integer $n$, then we may assume that $n \geq 0$, and we have $n \leq x$.
+If `x = n^2` for some integer `n`, then we may assume that `n >= 0`, and we have `n <= x`.
 We can therefore reuse the function from Exercise 8.5.1:
 ```ocaml
 let rec has_value f x l r =
@@ -24,7 +24,7 @@ let rec has_value f x l r =
   else if x > y then has_value f x (m + 1) r
   else true
 
-let is_square x =
+let square x =
   has_value (fun n -> n * n) x 0 x
 ```
 

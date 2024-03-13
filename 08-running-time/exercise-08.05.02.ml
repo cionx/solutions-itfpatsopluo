@@ -7,7 +7,7 @@ let rec has_value f x l r =
   else if x > y then has_value f x (m + 1) r
   else true
 
-let is_square x =
+let square x =
   has_value (fun n -> n * n) x 0 x
 
 
