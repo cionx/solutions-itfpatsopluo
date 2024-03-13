@@ -1,28 +1,26 @@
 # Exercise 3.4.1
 
-> Declare a test $\mathit{exists} : \mathit{int} \to \mathit{int} \to (\mathit{int} \to \mathit{bool}) \to \mathit{bool}$ such that $\mathit{exists} \; m \; n \; f = \mathsf{true} \longleftrightarrow \exists k, m \leq k \leq n. f k = \mathsf{true}$ in two ways:  
-> a) Directly following the design of $\mathit{forall}$.  
-> b) Using $\mathit{forall}$ and boolean negation $\mathit{not} : \mathit{bool} \to \mathit{bool}$.
+> Declare a test `exists : int → int → (int → bool) → bool` such that `exists m n f = true  <==>  ∃ k, m <= k <= n. f k = true` in two ways:
+> 1. Directly following the design of `forall`.
+> 2. Using `forall` and boolean negation `not : bool → bool`.
 
 ---
 
-### a)
+### 1.
 
-We can directly implement $\mathit{exists}$ as follows:
+We can directly implement `exists` as follows:
 ```ocaml
 let rec exists m n f =
   if m > n then false else f m || exists (m + 1) n f
 ```
 
-### b)
+### 2.
 
 It follows from De Morgan’s laws that
-$$
-  p_1 \vee \dotsb \vee p_n
-  \iff
-  \neg (\neg p_1 \wedge \dotsb \wedge \neg p_n) \,.
-$$
-We can therefore implement $\mathit{exists}$ in terms of $\mathit{forall}$ and the negation function $\mathit{not}$:
+```text
+p1 || ... || pn   <==>   ¬(¬p1 && ... && ¬pn) .
+```
+We can therefore implement `exists` in terms of `forall` and the negation function `not`:
 ```ocaml
 let rec exists m n f =
   let notf x = not (f x) in

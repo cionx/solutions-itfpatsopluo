@@ -1,7 +1,7 @@
 # Exercise 3.4.2
 
-> Declare a primality test based on the fourth characterization (i.e., upper bound $\sqrt[2]{x}$).
-> Convince yourself with an OCaml interpreter that testing with upper bound $\sqrt[2]{x}$ is much faster on large primes (check 479,001,599 and 87,178,291,199).
+> Declare a primality test based on the fourth characterization (i.e., upper bound `√x`).
+> Convince yourself with an OCaml interpreter that testing with upper bound `√x` is much faster on large primes (check `479,001,599` and `87,178,291,199`).
 
 ---
 
@@ -16,4 +16,4 @@ let rec forall' k p f =
 let prime' x =
   x >= 2 && forall' 2 (fun k -> k * k <= x) (fun k -> x mod k <> 0)
 ```
-Testing the given two primes with $\mathit{prime}'$ is (nearly) instantaneous, whereas the original $\mathit{prime}$ function just keeps on running.
+Testing the given two primes with `prime'` is (nearly) instantaneous, whereas the original `prime` function just keeps on running.

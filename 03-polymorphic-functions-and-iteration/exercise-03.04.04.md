@@ -4,4 +4,4 @@
 
 ---
 
-I have confinced myself of such.
+I have convinced myself.
