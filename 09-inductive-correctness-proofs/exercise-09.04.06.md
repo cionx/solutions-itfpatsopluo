@@ -1,17 +1,17 @@
 # Exercise 9.4.6 (Sum of square numbers)
 
-> Define a function `f : ℕ⁺ → ℕ⁺` computing the sum `0^2 + 1^2 + ... + n^2` of the square numbers.
+> Define a function `f : N+ → N+` computing the sum `0^2 + 1^2 + ... + n^2` of the square numbers.
 > Prove `f(n) = n * (2 n^2 + 3 n + 1) / 6`.
 
 ---
 
 We consider the following two functions:
 ```text
-    f : ℕ⁺ → ℕ⁺
+    f : N+ → N+
     f(0) := 0
 f(n + 1) := f(n) + (n + 1)^2
 
-    f' : ℕ⁺ → ℕ⁺
+    f' : N+ → N+
 f'(n) := n * (2 n^2 + 3 n + 1) / 6
 ```
 We show by induction that the functions `f` and `f'` are extensionally equal.

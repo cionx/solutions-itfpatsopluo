@@ -10,7 +10,7 @@
 
 We recall that `length` is recursively defined as follows:
 ```text
-      length : ∀ α. L(α) → ℕ
+      length : ∀ α. L(α) → N
       length [] := 0
 length (x :: l) := 1 + length l
 ```

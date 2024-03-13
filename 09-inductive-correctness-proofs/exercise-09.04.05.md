@@ -1,19 +1,19 @@
 # Exercise 9.4.5 (Sum of odd numbers)
 
-> Define a function `f : ℕ⁺ → ℕ⁺` computing the sum `1 + 3 + ··· + (2n − 1)` of the odd numbers from `1` to `2n − 1`.
+> Define a function `f : N+ → N+` computing the sum `1 + 3 + ··· + (2n − 1)` of the odd numbers from `1` to `2n − 1`.
 > Prove `f(n) = n^2`.
 
 ---
 
 The function `f` can recursively be declared as follows:
 ```text
-    f : ℕ⁺ → ℕ⁺
+    f : N+ → N+
     f(1) := 1
 f(n + 1) := f(n) + 2n + 1
 ```
 We consider now the function
 ```text
-f : ℕ⁺ → ℕ⁺
+f : N+ → N+
 f(n) := n^2
 ```
 
