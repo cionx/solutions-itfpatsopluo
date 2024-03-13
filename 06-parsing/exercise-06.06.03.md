@@ -2,7 +2,7 @@
 
 > Realize a lexer, a parser, and a linearizer for Mini-OCaml.
 > Check that parsing after linearization takes you back to the tree you started with, and that parsing followed by linearization gives you an equivalent string.
-> Extent Mini-OCaml with pair expressions $(e_1 , e_2)$ and the accompanying projections.
+> Extent Mini-OCaml with pair expressions `(e1, e2)` and the accompanying projections.
 
 ---
 
@@ -141,65 +141,22 @@ let lex s =
 ## Parsing
 
 We are given the following grammar for parsing:
-$$
-  \begin{aligned}
-    \mathit{exp}
-    \Coloneqq{}&
-    \texttt{"if"} \enspace \mathit{exp} \enspace \texttt{"then"} \enspace \mathit{exp} \enspace \texttt{"else"} \enspace \mathit{exp}
-    \\
-    \mid{}&
-    \texttt{"fun"} \enspace \mathit{var} \enspace \texttt{"->"} \enspace \mathit{exp}
-    \\
-    \mid{}&
-    \texttt{"let"} \enspace \mathit{var} \enspace \texttt{"="} \enspace \mathit{exp} \enspace \texttt{"in"} \enspace \mathit{exp}
-    \\
-    \mid{}&
-    \texttt{"let rec"} \enspace \mathit{var} \enspace \mathit{var} \enspace \texttt{"="} \enspace \mathit{exp} \enspace \texttt{"in"} \enspace \mathit{exp}
-    \\
-    \mid{}&
-    \mathit{cexp}
-    \\
-    \mathit{cexp}
-    \Coloneqq{}&
-    \mathit{sexp} \enspace \mathit{cexp'}
-    \\
-    \mathit{cexp'}
-    \Coloneqq{}&
-    \texttt{"<="} \enspace \mathit{sexp} \mid [\,]
-    \\
-    \mathit{sexp}
-    \Coloneqq{}&
-    \mathit{mexp} \enspace \mathit{sexp'}
-    \\
-    \mathit{sexp'}
-    \Coloneqq{}&
-    \texttt{"+"} \enspace \mathit{mexp} \enspace \mathit{sexp'}
-    \mid \texttt{"-"} \enspace \mathit{mexp} \enspace \mathit{sexp'}
-    \mid [\,]
-    \\
-    \mathit{mexp}
-    \Coloneqq{}&
-    \mathit{aexp} \enspace \mathit{mexp'}
-    \\
-    \mathit{mexp'}
-    \Coloneqq{}&
-    \texttt{"*"} \enspace \mathit{aexp} \enspace \mathit{mexp'}
-    \mid [\,]
-    \\
-    \mathit{aexp}
-    \Coloneqq{}&
-    \mathit{pexp} \enspace \mathit{aexp'}
-    \\
-    \mathit{aexp'}
-    \Coloneqq{}&
-    \mathit{pexp} \enspace \mathit{aexp'}
-    \mid [\,]
-    \\
-    \mathit{pexp}
-    \Coloneqq{}&
-    \mathit{var} \mid \mathit{con} \mid \texttt{"("} \enspace \mathit{exp} \enspace \texttt{")"}
-  \end{aligned}
-$$
+```text
+ exp   ::=  "if" exp "then" exp "else" exp
+         |  "fun" var "->" exp
+         |  "let" var "=" exp "in" exp
+         |  "let rec" var var "=" exp "in" exp
+         |  cexp
+cexp   ::=  sexp cexp'
+cexp'  ::=  "<=" sexp  |  []
+sexp   ::=  mexp sexp'
+sexp'  ::=  "+" mexp sexp'  |  "-" mexp sexp'  |  []
+mexp   ::=  aexp mexp'
+mexp'  ::=  "*" aexp mexp'  |  []
+aexp   ::=  pexp aexp'
+aexp'  ::=  pexp aexp'  |  []
+pexp   ::=  var  | con  |  "(" exp ")"
+```
 Addition, multiplication, subtraction, and application are all supposed to be parsed left-associatively.
 
 This grammar and these left-associativities lead us to the following parsing function:
@@ -274,20 +231,18 @@ and pexp l = match l with
 We can reuse our solution from Exercise 5.6.2:
 
 We use the following linearization grammar:
-$$
-  \begin{aligned}
-    \mathit{exp} \Coloneqq{}& \texttt{"if"} \enspace \mathit{exp} \enspace \texttt{"then"} \enspace \mathit{exp} \enspace \texttt{"else"} \enspace \mathit{exp} \\
-    \mid{}& \texttt{"fun"} \enspace \mathit{var} \enspace \texttt{"->"} \enspace \mathit{exp} \\
-    \mid{}& \texttt{"let"} \enspace \mathit{var} \enspace \texttt{"="} \enspace \mathit{exp} \enspace \texttt{"in"} \enspace \mathit{exp} \\
-    \mid{}& \texttt{"let rec"} \enspace \mathit{var} \enspace \mathit{var} \enspace \texttt{"="} \enspace \mathit{exp} \enspace \texttt{"in"} \enspace \mathit{exp} \\
-    \mid{}& \mathit{cexp} \\
-    \mathit{cexp} \Coloneqq{}& \mathit{sexp} \enspace \texttt{"<="} \enspace \mathit{sexp} \mid \mathit{sexp} \\
-    \mathit{sexp} \Coloneqq{}& \mathit{sexp} \enspace \texttt{"+"} \enspace \mathit{mexp} \mid \mathit{sexp} \enspace \texttt{"-"} \enspace \mathit{mexp} \mid \mathit{mexp} \\
-    \mathit{mexp} \Coloneqq{}& \mathit{mexp} \enspace \texttt{"*"} \enspace \mathit{aexp} \mid \mathit{aexp} \\
-    \mathit{aexp} \Coloneqq{}& \mathit{aexp} \enspace \mathit{pexp} \mid \mathit{pexp} \\
-    \mathit{pexp} \Coloneqq{}& \mathit{var} \mid \mathit{con} \mid \texttt{"("} \enspace \mathit{exp} \enspace \texttt{")"}
-  \end{aligned}
-$$
+```text
+ exp  ::=  "if" exp "then" exp "else" exp
+        |  "fun" var "->" exp
+        |  "let" var "=" exp "in" exp
+        |  "let rec" var var "=" exp "in" exp
+        |  cexp
+cexp  ::=  sexp "<=" sexp  |  sexp
+sexp  ::=  sexp "+" mexp  |  sexp "-" mexp  |  mexp
+mexp  ::=  mexp "*" aexp  |  aexp
+aexp  ::=  aexp pexp  |  pexp
+pexp  ::=  var  |  con  |  "(" exp ")"
+```
 The resulting linearization function is as follows:
 ```ocaml
 let string_of_bool b =
@@ -385,42 +340,17 @@ We extend the type `exp` with pairs and projections:
   ⋮
 ```
 
-For parsing we extend the rule $\mathit{aexp}$ to handle projections, and we extend the rule $\mathit{pexp}$ to handle pairs:
-$$
-  \begin{aligned}
-    \vdots\quad{}&
-    \\
-    \mathit{aexp}
-    \Coloneqq{}&
-    \texttt{"fst"} \enspace \mathit{pexp} \enspace \mathit{aexp'}
-    \mid \texttt{"snd"} \enspace \mathit{pexp} \enspace \mathit{aexp'}
-    \mid \mathit{pexp} \enspace \mathit{aexp'}
-    \\
-    \vdots\quad{}&
-    \\
-    \mathit{pexp}
-    \Coloneqq{}&
-    \mathit{var}
-    \mid \mathit{con}
-    \mid \texttt{"("} \enspace \mathit{exp} \enspace \texttt{")"}
-    \mid \texttt{"("} \enspace \mathit{exp} \enspace \texttt{","} \enspace \mathit{exp} \enspace \texttt{")"}
-  \end{aligned}
-$$
-For parsing purposes we rewrite this extended version of $\mathit{pexp}$ as follows:
-$$
-  \begin{aligned}
-    \mathit{pexp}
-    \Coloneqq{}&
-    \mathit{var}
-    \mid \mathit{con}
-    \mid \texttt{"("} \enspace \mathit{exp} \enspace \mathit{pexp'}
-    \\
-    \mathit{pexp'}
-    \Coloneqq{}&
-    \texttt{")"}
-    \mid \texttt{","} \enspace \mathit{exp} \enspace \texttt{")"}
-  \end{aligned}
-$$
+For parsing we extend the rule `aexp` to handle projections, and we extend the rule `pexp` to handle pairs:
+```text
+aexp  ::=  "fst" pexp aexp'  |  "snd" pexp aexp'  |  pexp aexp'
+       ⋮
+pexp  ::=  var  |  con  |  "(" exp ")"  |  "(" exp "," exp ")"
+```
+For parsing purposes we rewrite this extended version of `pexp` as follows:
+```text
+pexp   ::=  var  |  con  |  "(" exp pexp'
+pexp'  ::=  ")"  |  "," exp ")"
+```
 The corresponding changes in the parsing function look as follows:
 ```ocaml
 ⋮
@@ -447,25 +377,10 @@ and pexp' e l = match l with
 ### Linearization
 
 We modify the linearization grammar as follows:
-$$
-  \begin{aligned}
-    \vdots\quad{}&
-    \\
-    \mathit{aexp}
-    \Coloneqq{}&
-    \texttt{"fst"} \enspace \mathit{pexp}
-    \mid \texttt{"snd"} \enspace \mathit{pexp}
-    \mid \mathit{aexp} \enspace \mathit{pexp}
-    \mid \mathit{pexp}
-    \\
-    \mathit{pexp}
-    \Coloneqq{}&
-    \mathit{var}
-    \mid \mathit{con}
-    \mid \texttt{"("} \enspace \mathit{exp} \enspace \texttt{","} \enspace \mathit{exp} \enspace \texttt{")"}
-    \mid \texttt{"("} \enspace \mathit{exp} \enspace \texttt{")"}
-  \end{aligned}
-$$
+```text
+aexp  ::=  "fst" pexp  |  "snd" pexp  |  aexp pexp  |  pexp
+pexp  ::=  var  |  con  |  "(" exp "," exp ")"  |  "(" exp ")"
+```
 The changes to the linearization function are then as follows:
 ```ocaml
 and lin_aexp e = match e with

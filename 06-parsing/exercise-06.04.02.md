@@ -1,17 +1,16 @@
 # Exercise 6.4.2 (Pair Notation)
 
-> We may linearize trees $B(t_1, t_2)$ as pairs $(t_1, t_2)$.
-> In this case, $B$ needs neither precedence nor associativity since it can be accommodated at the lowest level $\mathit{ptree}$.
-> Consider the following parsing grammar accommodating $C$ as an infix operator and $B$ with pair notation:
-> $$
->   \begin{aligned}
->     \mathit{tree}  &\Coloneqq \mathit{ptree} \enspace \mathit{tree}'
->     \\
->     \mathit{tree}' &\Coloneqq \texttt{"C"} \enspace \mathit{ptree} \enspace \mathit{tree}' \mid [\,] \\
->     \mathit{ptree} &\Coloneqq \texttt{"A"} \mid \texttt{"("} \enspace \mathit{tree} \enspace \texttt{")"} \mid \texttt{"("} \enspace \mathit{tree} \enspace \texttt{","} \enspace \mathit{tree} \enspace \texttt{")"}
->   \end{aligned}
-> $$
-> Declare parsing functions for the grammar treating $C$ as left-associative operator.
+> We may linearize trees `B(t1, t2)` as pairs `(t1, t2)`.
+> In this case, `B` needs neither precedence nor associativity since it can be accommodated at the lowest level `ptree`.
+> Consider the following parsing grammar accommodating `C` as an infix operator and `B` with pair notation:
+> ```text
+>  tree   ::=  ptree tree'
+>  tree'  ::=  "C" ptree tree'  |  []
+> ptree   ::=  "A"
+>           |  "(" tree ")"
+>           |  "(" tree "," tree ")"
+> ```
+> Declare parsing functions for the grammar treating `C` as left-associative operator.
 
 ---
 
@@ -37,16 +36,12 @@ let lex s =
 ```
 
 To implement a parser we rewrite the provided grammar as follows:
-$$
-  \begin{aligned}
-    \mathit{tree}  &\Coloneqq \mathit{ptree} \enspace \mathit{tree}'
-    \\
-    \mathit{tree'} &\Coloneqq \texttt{"C"} \enspace \mathit{ptree} \enspace \mathit{tree}' \mid [\,] \\
-    \mathit{ptree} &\Coloneqq \texttt{"A"} \mid \texttt{"("} \enspace \mathit{tree} \enspace \mathit{ptree'}
-    \\
-    \mathit{ptree}' &\Coloneqq \texttt{")"} \mid \texttt{","} \enspace \mathit{tree} \enspace \texttt{")"}
-  \end{aligned}
-$$
+```
+ tree   ::=  ptree tree'
+ tree'  ::=  "C" ptree tree'  |  []
+ptree   ::=  "A"  |  "(" tree ptree'
+ptree'  ::=  ")"  |  "," tree ")"
+```
 
 This grammar translates into the following parsing function:
 ```ocaml

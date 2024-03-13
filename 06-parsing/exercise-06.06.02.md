@@ -1,10 +1,10 @@
 # Exercise 6.6.2
 
-> Declare a function $\mathit{string} \to \mathit{string}$ reading an identifier starting with a lower case letter from a string.
+> Declare a function `string → string` reading an identifier starting with a lower case letter from a string.
 > Assume that the string starts with a lower case letter and read as many letters and digits
 > as possible.
 > For instance, `"dieter2Schlau+x"` should yield the identifier `"dieter2Schlau"`.
-> Realize the function with a tail-recursive helper function and OCaml’s function $\mathit{List.sub} \; s \; i \; n$ yielding the substring of $s$ starting at position $i$ and having length $n$.
+> Realize the function with a tail-recursive helper function and OCaml’s function `List.sub s i n` yielding the substring of `s` starting at position `i` and having length `n`.
 > Make use of ASCII codes (see Exercise 6.1.4) to identify lower case letters, upper case letters, and digits.
 
 ---

@@ -1,12 +1,12 @@
 # Exercise 6.6.1
 
-> Declare a function $\mathit{string} \to \mathit{int}$ reading a number from a string.
+> Declare a function `string → int` reading a number from a string.
 > Assume that the string starts with a digit and read as many digits as possible.
-> For instance, `"123 Dieter"` should yield the number 123.
+> For instance, `"123 Dieter"` should yield the number `123`.
 > Realize the function with a tail-recursive helper function and make use of ASCII codes (see Exercise 6.1.4).
 > You may use the function
 > ```ocaml
->   let num c = Char.code c - Char.code '0'
+> let num c = Char.code c - Char.code '0'
 > ```
 > to convert characters that are digits into numbers.
 

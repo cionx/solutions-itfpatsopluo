@@ -14,11 +14,9 @@
 ### 1: 1. for AB-trees without extra parentheses
 
 OCaml linearization of AB-trees has the following linearization grammar:
-$$
-  \mathit{tree}
-  \Coloneqq
-  \texttt{"A"} \mid \texttt{"B"} \enspace \texttt{"("} \enspace \mathit{tree} \enspace \texttt{","} \enspace \mathit{tree} \enspace \texttt{")"}
-$$
+```text
+tree  ::=  "A"  |  "B" "(" tree "," tree ")"
+```
 
 We start by writing a lexer:
 ```ocaml
@@ -60,11 +58,9 @@ let rec parse l =
 ### 2: 1. for AB-trees with extra parentheses
 
 We allow extra parentheses with the following extended syntax:
-$$
-  \mathit{tree}
-  \Coloneqq
-  \texttt{"A"} \mid \texttt{"B"} \enspace \texttt{"("} \enspace \mathit{tree} \enspace \texttt{","} \enspace \mathit{tree} \enspace \texttt{")"} \mid \texttt{"("} \enspace \mathit{tree} \enspace \texttt{")"}
-$$
+```text
+tree  ::=  "A"  |  "B" "(" tree "," tree ")"  |  "(" tree ")"
+```
 We only need to extend the `parser` function by the following lines:
 ```ocaml
   | LP :: l ->
@@ -84,13 +80,11 @@ But our recursive parser needs to somehow know which pattern to use to parse the
 ### 3: 1. for ABC-trees without extra parentheses
 
 We now have the following grammar:
-$$
-  \mathit{tree}
-  \Coloneqq
-  \texttt{"A"}
-  \mid \texttt{"B"} \enspace \texttt{"("} \enspace \mathit{tree} \enspace \texttt{","} \enspace \mathit{tree} \enspace \texttt{")"}
-  \mid \texttt{"C"} \enspace \texttt{"("} \enspace \mathit{tree} \enspace \texttt{","} \enspace \mathit{tree} \enspace \texttt{")"}
-$$
+```text
+tree  ::=  "A"
+        |  "B" "(" tree "," tree ")"
+        |  "C" "(" tree "," tree ")"
+```
 We only have to extend our lexer and parser:
 ```ocaml
 type tree = A | B of tree * tree | C of tree * tree
@@ -138,14 +132,12 @@ let rec parse l =
 ### 4: 1. for ABC-trees with extra parentheses
 
 Similar to before, we now use the extended grammar
-$$
-  \mathit{tree}
-  \Coloneqq
-  \texttt{"A"}
-  \mid \texttt{"B"} \enspace \texttt{"("} \enspace \mathit{tree} \enspace \texttt{","} \enspace \mathit{tree} \enspace \texttt{")"}
-  \mid \texttt{"C"} \enspace \texttt{"("} \enspace \mathit{tree} \enspace \texttt{","} \enspace \mathit{tree} \enspace \texttt{")"}
-  \mid \texttt{"("} \enspace \mathit{tree} \enspace \texttt{")"}
-$$
+```text
+tree  ::=  "A"
+        |  "B" "(" tree "," tree ")"
+        |  "C" "(" tree "," tree ")"
+        |  "(" tree ")"
+```
 As before, we only need to extend the function `parse` by the following lines:
 ```ocaml
   | LP :: l ->
@@ -159,13 +151,9 @@ As before, we only need to extend the function `parse` by the following lines:
 ### 5: 2. for AB-trees without extra parentheses
 
 The grammar for fully parentheses infix notation for AB-trees is as follows:
-$$
-  \mathit{tree}
-  \Coloneqq
-  \texttt{"A"}
-  \mid \texttt{"("} \enspace \mathit{tree} \enspace \texttt{"B"} \enspace \mathit{tree} \enspace \texttt{")"}
-$$
-
+```text
+tree  ::=  "A"  |  "(" tree "B" tree ")"
+```
 We can use the same lexer as before, and the following parser:
 ```ocaml
 let rec parse l =
@@ -185,39 +173,18 @@ let rec parse l =
 ### 6: 2. for AB-trees with extra parentheses
 
 We can use the following grammar:
-$$
-  \begin{aligned}
-    \mathit{tree}
-    &\Coloneqq
-    \mathit{ptree} \enspace \texttt{"B"} \enspace \mathit{ptree}
-    \mid \mathit{ptree}
-    \\
-    \mathit{ptree}
-    &\Coloneqq
-    \texttt{"A"}
-    \mid \texttt{"("} \enspace \mathit{tree} \enspace \texttt{")"}
-  \end{aligned}
-$$
+```text
+ tree  ::=  ptree "B" ptree  |  ptree
+ptree  ::=  "A"  |  "(" tree ")"
+```
 This grammar has a problem:
-we cannot tell apart the two construction rules $\mathit{tree} \; \texttt{"B"} \; \mathit{ptree}$ and $\mathit{ptree}$ by looking at only a fixed number of beginning tokens.
+we cannot tell apart the two construction rules `tree "B" ptree` and `ptree` by looking at only a fixed number of beginning tokens.
 Motivated by the upcoming Section 6.3 we therefore use the following modified grammar:
-$$
-  \begin{aligned}
-    \mathit{tree}
-    &\Coloneqq
-    \mathit{ptree} \enspace \mathit{tree}'
-    \\
-    \mathit{tree}'
-    &\Coloneqq
-    \texttt{"B"} \enspace \mathit{ptree}
-    \mid \varepsilon
-    \\
-    \mathit{ptree}
-    &\Coloneqq
-    \texttt{"A"}
-    \mid \texttt{"("} \enspace \mathit{tree} \enspace \texttt{")"}
-  \end{aligned}
-$$
+```text
+ tree   ::=  ptree tree'
+ptree   ::=  "B" ptree | []
+ptree'  ::=  "A" | "(" tree ")"
+```
 We also model the parser according to Section 6.3:
 ```ocaml
 let rec tree l =
@@ -241,27 +208,17 @@ and ptree l = match l with
 ### 7: 2. for ABC-trees without extra parentheses
 
 The grammar for fully parentheses infix notation for ABC-trees is as follows:
-$$
-  \mathit{tree}
-  \Coloneqq
-  \texttt{"A"}
-  \mid \texttt{"("} \enspace \mathit{tree} \enspace \texttt{"B"} \enspace \mathit{tree} \enspace \texttt{")"}
-  \mid \texttt{"("} \enspace \mathit{tree} \enspace \texttt{"C"} \enspace \mathit{tree} \enspace \texttt{")"}
-$$
-We again have the problem that the two production rules $\texttt{"("} \; \mathit{tree} \; \texttt{"B"} \; \mathit{tree} \; \texttt{")"}$ and $\texttt{"("} \; \mathit{tree} \; \texttt{"C"} \; \mathit{tree} \; \texttt{")"}$ cannot be told apart by looking at only a fixed number of initial tokens.
+```text
+tree  ::=  "A"
+        |  "(" tree "B" tree ")"
+        |  "(" tree "C" tree ")"
+```
+We again have the problem that the two production rules `"(" tree "B" tree ")"` and `"(" tree "C" tree ")"` cannot be told apart by looking at only a fixed number of initial tokens.
 We therefore use the following modified grammar instead:
-$$
-  \begin{aligned}
-    \mathit{tree}
-    &\Coloneqq
-    \texttt{"A"}
-    \mid \texttt{"("} \enspace \mathit{tree} \enspace \mathit{tree}' \\
-    \mathit{tree}'
-    &\Coloneqq
-    \texttt{"B"} \enspace \mathit{tree} \enspace \texttt{")"}
-    \mid \texttt{"C"} \enspace \mathit{tree} \enspace \texttt{")"} \\
-  \end{aligned}
-$$
+```text
+tree   ::=  "A"  |  "(" tree tree'
+tree'  ::=  "B" tree ")"  |  "C" tree ")"
+```
 We can parse this grammar as follows:
 ```ocaml
 let rec tree l = match l with
@@ -286,39 +243,18 @@ and tree' t1 l = match l with
 ### 8: 2. for ABC-trees with extra parentheses
 
 We can use the following grammar:
-$$
-  \begin{aligned}
-    \mathit{tree}
-    &\Coloneqq
-    \mathit{ptree} \enspace \texttt{"B"} \enspace \mathit{ptree}
-    \mid \mathit{ptree} \enspace \texttt{"C"} \enspace \mathit{ptree}
-    \mid \mathit{ptree}
-    \\
-    \mathit{ptree}
-    &\Coloneqq
-    \texttt{"A"}
-    \mid \texttt{"("} \enspace \mathit{tree} \enspace \texttt{")"}
-  \end{aligned}
-$$
+```
+ tree  ::=  ptree "B" ptree
+         |  ptree "C" ptree
+         |  ptree
+ptree  ::=  "A"  |  "(" tree ")"
+```
 As before, we rewrite this grammar as follows:
-$$
-  \begin{aligned}
-    \mathit{tree}
-    &\Coloneqq
-    \mathit{ptree} \enspace \mathit{tree}'
-    \\
-    \mathit{tree}'
-    &\Coloneqq
-    \texttt{"B"} \enspace \mathit{ptree}
-    \mid  \texttt{"C"} \enspace \mathit{ptree}
-    \mid \varepsilon
-    \\
-    \mathit{ptree}
-    &\Coloneqq
-    \texttt{"A"}
-    \mid \texttt{"("} \enspace \mathit{tree} \enspace \texttt{")"}
-  \end{aligned}
-$$
+```text
+ tree   ::=  ptree tree'
+ tree'  ::=  "B" ptree  |  "C" ptree  |  []
+ptree   ::=  "A"  |  "(" tree ")"
+```
 We can write a parser for this modified grammar as follows:
 ```ocaml
 let rec tree l =

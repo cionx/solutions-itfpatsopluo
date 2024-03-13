@@ -1,7 +1,7 @@
 # Exercise 6.1.1
 
 > Write a tail-recursive lexer for ABC-trees treating all characters but `'A'`, `'B'`, `'C'`, `'('`, and `')'` as white space characters.
-> For instance, `"A (likes) B"` should yield the list $[\mathit{AT}, \mathit{LP}, \mathit{RP}, \mathit{BT}]$.
+> For instance, `"A (likes) B"` should yield the list `[AT, LP, RP, BT]`.
 
 ---
 

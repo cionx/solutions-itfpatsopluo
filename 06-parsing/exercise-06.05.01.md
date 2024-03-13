@@ -1,6 +1,6 @@
 # Exercise 6.5.1
 
-> Declare a function $\mathit{depost'} : \mathit{string} → \mathcal{O}(\mathit{tree})$ such that $\mathit{depost'}(s) = \textsf{Some} \; t$ if and only if $\mathit{post}\; (t) = s$.
+> Declare a function `depost' : string → O(tree)` such that `depost'(s) = Some t` if and only if `post(t) = s`.
 
 ---
 

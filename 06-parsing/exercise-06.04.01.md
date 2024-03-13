@@ -1,10 +1,10 @@
 # Exercise 6.4.1
 
-> Declare parsers for ABC-trees and infix linearizations where $B$ takes arguments before $C$, $C$ is left-associative, and
-> 1. $B$ is left-associative.
-> 2. $B$ is right-associative.
-> 3. $B$ is realized with left-associative juxtaposition.
-> 4. $B$ is realized with right-associative juxtaposition.
+> Declare parsers for ABC-trees and infix linearizations where `B` takes arguments before `C`, `C` is left-associative, and
+> 1. `B` is left-associative.
+> 2. `B` is right-associative.
+> 3. `B` is realized with left-associative juxtaposition.
+> 4. `B` is realized with right-associative juxtaposition.
 
 ---
 
@@ -68,7 +68,7 @@ and ptree2 l = match l with
 
 ### 3.
 
-We only have to extend the declaration of $\mathit{btree}'$ by a new case:
+We only have to extend the declaration of `btree'` by a new case:
 ```ocaml
 let rec tree3 l =
   let (t, l) = btree3 l in tree3' t l
@@ -97,7 +97,7 @@ and ptree3 l = match l with
 
 ### 4.
 
-As before, we only need to extend the declaration of $\mathit{btree}'$ by an additional case:
+As before, we only need to extend the declaration of `btree'` by an additional case:
 ```ocaml
 let rec tree4 l =
   let (t, l) = btree4 l in tree4' t l

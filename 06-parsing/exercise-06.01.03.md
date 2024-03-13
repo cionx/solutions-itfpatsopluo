@@ -6,14 +6,12 @@
 >   let implode l = List.fold_right (fun c s -> String.make 1 c ^ s) l ""
 > ```
 > convert between strings and character lists such that the equations
-> $$
->   \begin{aligned}
->     \mathit{implode} \; (\mathit{explode} \; s) &= s \\
->     \mathit{explode} \; (\mathit{implode} \; l) &= l
->   \end{aligned}
-> $$
-> hold for all strings $s$ and all character lists $l$.
-> Note the use of OCaml’s function $\mathit{String.make}$ providing for the translation of characters into strings ($\mathit{String.make} \enspace n \enspace c$ yields the string consisting of $n \geq 0$ occurrences of the character $c$).
+> ```text
+> implode (explode s) = s
+> explode (implode l) = l
+> ```
+> hold for all strings `s` and all character lists `l`.
+> Note the use of OCaml’s function `String.make` providing for the translation of characters into strings (`String.make n c` yields the string consisting of `n >= 0` occurrences of the character `c`).
 > 1. Try explode `"Saarbrücken"` and try to explain what you see.
 > 2. Try implode `['\240'; '\159'; '\152'; '\138']` and enjoy.
 > 3. Try implode `['\240'; '\159'; '\167'; '\144']` and enjoy.

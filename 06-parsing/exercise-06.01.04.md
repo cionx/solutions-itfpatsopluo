@@ -1,15 +1,14 @@
 # Exercise 6.1.4 (ASCII Codes)
 
 > OCaml has two functions
-> $$
-> \begin{gathered}
->   \mathit{Char.code} : \mathit{char} → \mathit{int} \\
->   \mathit{Char.chr} : \mathit{int} → \mathit{char}
-> \end{gathered}
-> $$
+> ```text
+> Char.code : char -> int
+>  Char.chr : int -> char
+> ```
 > converting between characters and ASCII codes, which are numbers between 0 and 255.
-> We have $\mathit{Char.chr} \; (\mathit{Char.code} \; c) = c$ for all characters $c$.
-> Moreover, $c < c'$ if and only if $\mathit{Char.code} \; c < \mathit{Char.code} \; c'$. Look up an ASCII table in the web to learn more.
+> We have `Char.chr (Char.code c) = c` for all characters `c`.
+> Moreover, `c < c'` if and only if `Char.code c < Char.code c'`.
+> Look up an ASCII table in the web to learn more.
 > Using conversion to ASCII codes, declare functions as follows:
 > 1. A function checking whether a character is a digit.
 > 2. A function converting characters that are digits into numbers.

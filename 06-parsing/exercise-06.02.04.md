@@ -1,7 +1,7 @@
 # Exercise 6.2.4
 
 > Declare a function checking that a string consists of balanced parentheses only.
-> For instance, $((()())()())$ is fine but $((()())$ is not.
+> For instance, `((()())()())` is fine but `((()())` is not.
 
 ---
 

@@ -39,35 +39,18 @@ let lex s =
 ### 1.
 
 We use the following grammar for the input infix linearization:
-$$
-  \begin{aligned}
-    \mathit{tree}
-    &\Coloneqq
-    \mathit{ptree} \enspace \texttt{"B"} \enspace \mathit{ptree} \mid \mathit{ptree}
-    \\
-    \mathit{ptree}
-    &\Coloneqq
-    \texttt{"A"} \mid \texttt{"("} \enspace \mathit{tree} \enspace \texttt{")"}
-  \end{aligned}
-$$
-This grammar treats $B$ as non-associative, but allows for extra parentheses.
+```text
+ tree  ::=  ptree "B" ptree  |  ptree
+ptree  ::=  "A"  |  "(" tree ")"
+```
+This grammar treats `B` as non-associative, but allows for extra parentheses.
 
 To parse this input grammar, we rewrite it as follows:
-$$
-  \begin{aligned}
-    \mathit{tree}
-    &\Coloneqq
-    \mathit{ptree} \enspace \mathit{tree'}
-    \\
-    \mathit{tree'}
-    &\Coloneqq
-    \texttt{"B"} \enspace \mathit{ptree} \mid \varepsilon
-    \\
-    \mathit{ptree}
-    &\Coloneqq
-    \texttt{"A"} \mid \texttt{"("} \enspace \mathit{tree} \enspace \texttt{")"}
-  \end{aligned}
-$$
+```text
+ tree   ::=  ptree tree'
+ tree'  ::=  "B" ptree  |  []
+ptree   ::=  "A"  |  "(" tree ")"
+```
 We can then use the following parse function:
 ```ocaml
 let rec tree l =
@@ -87,17 +70,10 @@ and ptree l = match l with
 ```
 
 For linearization, we use the following linearization function, as taken from Section 5.4:
-$$
-  \begin{aligned}
-    \mathit{tree}
-    &\Coloneqq
-    \texttt{"A"} \mid \mathit{tree} \enspace \texttt{"B"} \enspace \mathit{ptree}
-    \\
-    \mathit{ptree}
-    &\Coloneqq
-    \texttt{"A"} \mid \texttt{"("} \enspace \mathit{tree} \enspace \texttt{")"}
-  \end{aligned}
-$$
+```text
+ tree  ::=  "A"  |  tree "B" ptree
+ptree  ::=  "A"  |  "(" tree ")"
+```
 The resulting linearization function is as follows:
 ```ocaml
 let rec left_lin_tree t = match t with
@@ -114,7 +90,7 @@ let simplify1 s =
   left_lin_tree (fst (tree (lex s)))
 ```
 
-We test the function $\mathit{simplify1}$ as follows:
+We test the function `simplify1` as follows:
 ```ocaml
 # simplify1 "(ABA)BA";;
 - : string = "ABABA"

@@ -2,9 +2,9 @@
 
 > AB-trees can be linearized with just parentheses.
 > For instance,
-> $$
->   B(B(A, B(A, A)), B(A, A)) \rightsquigarrow ((()(()()))(()())) \,.
-> $$
+> ```text
+>   B(B(A, B(A, A)), B(A, A)) → ((()(()()))(()())) .
+> ```
 > Declare a linearizer and a parser for this format.
 
 ---
