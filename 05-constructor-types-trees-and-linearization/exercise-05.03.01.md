@@ -1,6 +1,6 @@
 # Exercise 5.3.1
 
-> Declare a function $\mathit{tree} \to \mathit{string}$ linearizing AB-trees in OCaml notation.
+> Declare a function `tree → string` linearizing AB-trees in OCaml notation.
 
 ---
 

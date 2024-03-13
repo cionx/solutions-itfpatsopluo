@@ -1,6 +1,6 @@
 # Exercise 5.3.2
 
-> Declare a function $\mathcal{L}(\mathbb{B}) \to \mathit{string}$ linearizing boolean lists using bracket notation.
+> Declare a function `L(B) → string` linearizing boolean lists using bracket notation.
 
 ---
 
@@ -12,7 +12,7 @@ let string_of_bool b =
   | false -> "false"
 ```
 
-We then declare an auxiliary function that converts a list of values $x_1, x_2, \dotsc, x_n$ into the string `"; x1; x2; ...; xn"` (the periods here are metasyntax, and won’t appear in the actual string):
+We then declare an auxiliary function that converts a list of values `x1, x2, ..., xn` into the string `"; x1; x2; ...; xn"` (the periods here are metasyntax, and won’t appear in the actual string):
 ```ocaml
 let rec string_of_list' strfun l =
   match l with
@@ -28,7 +28,7 @@ let string_of_list strfun l =
   | (h :: t) -> "[" ^ (strfun h) ^ (string_of_list' strfun t) ^ "]"
 ```
 
-Finally, we specify the above function $\mathit{string\_of\_list}$ to lists of booleans:
+Finally, we specify the above function `string_of_list` to lists of booleans:
 ```ocaml
 let string_of_bool_list =
   string_of_list string_of_bool

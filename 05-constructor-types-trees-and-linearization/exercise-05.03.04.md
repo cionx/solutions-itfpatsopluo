@@ -1,10 +1,10 @@
 # Exercise 5.3.4
 
-> Declare a function $\mathcal{L}(\mathit{int}) \to \mathit{string}$ linearizing lists of integers using bracket notation.
+> Declare a function `L(int) → string` linearizing lists of integers using bracket notation.
 
 ---
 
-We only have to combine the general function $\mathit{string\_of\_list}$ that we wrote for Exercise 5.3.2 with the function $\mathit{string\_of\_int}$ from Exercise 5.3.3:
+We only have to combine the general function `string_of_list` that we wrote for Exercise 5.3.2 with the function `string_of_int` from Exercise 5.3.3:
 ```ocaml
 (** From Exercise 5.3.2. *)
 

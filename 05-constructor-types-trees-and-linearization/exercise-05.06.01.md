@@ -1,9 +1,9 @@
 # Exercise 5.6.1
 
 > Recall the binding rules from Figure 2.3.
-> 1. Declare a function $\mathcal{L}(\mathit{var}) \to \mathit{exp} \to \mathit{bool}$ that checks whether a binding judgment $X \vdash e$ is derivable.
-> 2. Declare a function $\mathit{exp} \to \mathit{bool}$ that checks whether an expression is closed.
-> 3. Declare a function $\mathit{exp} \to \mathcal{L}(\mathit{var})$ that yields a list containing the free variables of an expression.
+> 1. Declare a function `L(var) → exp → bool` that checks whether a binding judgment `X ⊢ e` is derivable.
+> 2. Declare a function `exp → bool` that checks whether an expression is closed.
+> 3. Declare a function `exp → L(var)` that yields a list containing the free variables of an expression.
 
 ---
 
@@ -31,7 +31,7 @@ let rec derive l e =
 
 ### 2.
 
-An expression $e$ is closed if and only if it contains no free variables, if and only if every free variable in $e$ is contained in the empty set $\emptyset$, if and only if $\emptyset \vdash e$.
+An expression `e` is closed if and only if it contains no free variables, if and only if every free variable in `e` is contained in the empty set `{}`, if and only if `{} ⊢ e`.
 We can therefore use the following test:
 ```ocaml
 let closed e =
@@ -40,41 +40,18 @@ let closed e =
 
 ### 3.
 
-We declare the function $\mathit{free}$ as follows:
-$$
-  \begin{gathered}
-    \mathit{free} : \mathit{exp} \to \mathcal{L}(\mathit{var}) \,, \\
-    \begin{aligned}
-      \mathit{free} \; x &\Coloneqq x \,,
-      \\
-      \mathit{free} \; c &\Coloneqq \emptyset \,,
-      \\
-      \mathit{free} \; (e_1 \; o \; e_2)
-      &\Coloneqq
-      \mathit{free} \; e_1 \cup \mathit{free} \; e_2
-      \\
-      \mathit{free} \; (e_1 \; e_2)
-      &\Coloneqq
-      \mathit{free} \; e_1 \cup \mathit{free} \; e_2
-      \\
-      \mathit{free} \; (\text{if } e_1 \text{ then } e_2 \text{ else } e_3)
-      &\Coloneqq
-      \mathit{free} \; e_1 \cup \mathit{free} \; e_2 \cup \mathit{free} \; e_3
-      \\
-      \mathit{free} \; (\lambda x. e)
-      &\Coloneqq
-      \mathit{free} \; e \smallsetminus \{ x \}
-      \\
-      \mathit{free} \; (\text{let } x = e_1 \text{ in } e_2)
-      &\Coloneqq
-      \mathit{free} \; e_1 \cup (\mathit{free} \; e_2 \smallsetminus \{ x \})
-      \\
-      \mathit{free} \; (\text{let rec } f \; x = e_1 \text{ in } e_2)
-      &\Coloneqq
-      (\mathit{free} \; e_1 \smallsetminus \{ f, x \}) \cup (\mathit{free} \; e_2 \smallsetminus \{ f \})
-    \end{aligned}
-  \end{gathered}
-$$
+We declare the function `free` as follows:
+```text
+                       free : exp → L(var)
+                       free x  :=  {x}
+                       free c  :=  {}
+               free (e1 o e2)  :=  free e1 + free e2
+                 free (e1 e2)  :=  free e1 + free e2
+ free (if e1 then e2 else e3)  :=  free e1 + free e2 + free e3
+                free (λ x. e)  :=  free e - {x}
+      free (let x = e1 in e2)  :=  free e1 + (free e2 - {x})
+free (let rec f x = e1 in e2)  :=  (free e1 - {f, x}) + (free e2 - {f})
+```
 In terms of OCaml code, we implement sets as non-repeating lists:
 ```ocaml
 let mem = List.mem
@@ -88,7 +65,7 @@ let union s1 s2 =
 let rec remove x s =
   List.filter (fun y -> x <> y) s
 ```
-We can then declare $\mathit{free}$ in OCaml code as follows:
+We can then declare `free` in OCaml code as follows:
 ```ocaml
 let rec frees e =
   match e with

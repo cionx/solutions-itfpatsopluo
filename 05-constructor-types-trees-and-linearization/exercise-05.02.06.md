@@ -1,7 +1,7 @@
 # Exercise 5.2.6 (Minimal Trees)
 
 > A tree is _minimal_ if its size is minimal for all trees of the same depth.
-> The two minimal trees of depth 2 look as follows:
+> The two minimal trees of depth `2` look as follows:
 > ```text
 >    B                      B
 >   / \                    / \
@@ -11,9 +11,9 @@
 >     /   \            /   \
 >    A     A          A     A
 > ```
-> 1. Declare a function $\mathit{mtree} : \mathbb{N} \to \mathbb{tree}$ that yields a minimal tree of depth $n$.
->    Also give a tail-recursive function such that $\mathit{mtree}' \; n \; A$ yields a minimal tree of depth $n$.
-> 2. Declare a function $\mathit{check} : \mathit{tree} \to \mathcal{O}(\mathbb{N})$ such that $\mathit{check} \; t = \mathsf{Some} \; n$ if $t$ is a minimal tree of depth $n$, and $\mathit{check} \; t = \mathsf{None}$ if $t$ is not minimal.
+> 1. Declare a function `mtree : N → tree` that yields a minimal tree of depth `n`.
+>    Also give a tail-recursive function such that `mtree' n A` yields a minimal tree of depth `n`.
+> 2. Declare a function `check : tree → O(N)` such that `check t = Some n` if `t` is a minimal tree of depth `n`, and `check t = None` if `t` is not minimal.
 
 ---
 
@@ -39,42 +39,24 @@ A   B
              / \
             A   A
 ```
-We can thus reuse the function $\mathit{dtree}$ from Exercise 5.2.4, renaming it to $\mathit{mtree}$:
-$$
-  \begin{gathered}
-    \mathit{mtree} : \mathbb{N} \to \mathit{tree} \,, \\
-    \begin{aligned}
-      \mathit{mtree} \; 0
-      &\coloneqq
-      A \,,
-      \\
-      \mathit{mtree} \; (n + 1)
-      &\coloneqq
-      B \; A \; (\mathit{mtree} \; n)
-    \end{aligned}
-  \end{gathered}
-$$
+We can thus reuse the function `dtree` from Exercise 5.2.4, renaming it to `mtree`:
+```text
+      mtree : N → tree
+      mtree 0 := A
+mtree (n + 1) := B(A, mtree n)
+```
 In OCaml code:
 ```ocaml
 let rec mtree n =
   if n = 0 then A else B (A, mtree (n - 1))
 ```
 
-The function $\mathit{mtree}'$ can be declared as follows:
-$$
-  \begin{gathered}
-    \mathit{mtree}' : \mathbb{N} \to \mathit{tree} \to \mathit{tree} \,, \\
-    \begin{aligned}
-      \mathit{mtree}' \; 0 \; t
-      &\coloneqq
-      t \,,
-      \\
-      \mathit{mtree}' \; (n + 1) \; t
-      &\coloneqq
-      \mathit{mtree}' \; n \; (B \; A \; t)
-    \end{aligned}
-  \end{gathered}
-$$
+The function `mtree'` can be declared as follows:
+```text
+      mtree' : N → tree → tree
+      mtree' 0 t := t
+mtree' (n + 1) t := mtree' n B(A, t)
+```
 In OCaml code:
 ```ocaml
 let rec mtree' n t =
@@ -85,8 +67,8 @@ let rec mtree' n t =
 
 ### 2.
 
-We can check that $t$ is either $A$, or that one of the branches of $t$ is $A$ and the other branch is minimal.
-We thus get the following declaration for $\mathit{check}$ in OCaml:
+We can check that `t` is either `A`, or that one of the branches of `t` is `A` and the other branch is minimal.
+We thus get the following declaration for `check` in OCaml:
 ```ocaml
 let rec check t =
   match t with

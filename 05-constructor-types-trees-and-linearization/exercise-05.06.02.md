@@ -1,26 +1,24 @@
 # Exercise 5.6.2
 
-> Declare a function $\mathit{exp} \to \mathit{string}$ that linearizes expressions following the given linearization grammar.
+> Declare a function `exp → string` that linearizes expressions following the given linearization grammar.
 > Your linearization should be such that the string can serve as OCaml input after removal
 > of the double quotes `'"'`, provided only lower-case identifiers are used for variables.
 
 ---
 
 The given linearization grammar is as follows:
-$$
-  \begin{aligned}
-    \mathit{exp} \Coloneqq{}& \texttt{"if"} \enspace \mathit{exp} \enspace \texttt{"then"} \enspace \mathit{exp} \enspace \texttt{"else"} \enspace \mathit{exp} \\
-    \mid{}& \texttt{"fun"} \enspace \mathit{var} \enspace \texttt{"->"} \enspace \mathit{exp} \\
-    \mid{}& \texttt{"let"} \enspace \mathit{var} \enspace \texttt{"="} \enspace \mathit{exp} \enspace \texttt{"in"} \enspace \mathit{exp} \\
-    \mid{}& \texttt{"let rec"} \enspace \mathit{var} \enspace \mathit{var} \enspace \texttt{"="} \enspace \mathit{exp} \enspace \texttt{"in"} \enspace \mathit{exp} \\
-    \mid{}& \mathit{cexp} \\
-    \mathit{cexp} \Coloneqq{}& \mathit{sexp} \enspace \texttt{"<="} \enspace \mathit{sexp} \mid \mathit{sexp} \\
-    \mathit{sexp} \Coloneqq{}& \mathit{sexp} \enspace \texttt{"+"} \enspace \mathit{mexp} \mid \mathit{sexp} \enspace \texttt{"-"} \enspace \mathit{mexp} \mid \mathit{mexp} \\
-    \mathit{mexp} \Coloneqq{}& \mathit{mexp} \enspace \texttt{"*"} \enspace \mathit{aexp} \mid \mathit{aexp} \\
-    \mathit{aexp} \Coloneqq{}& \mathit{aexp} \enspace \mathit{pexp} \mid \mathit{pexp} \\
-    \mathit{pexp} \Coloneqq{}& \mathit{var} \mid \mathit{con} \mid \texttt{"("} \enspace \mathit{exp} \enspace \texttt{")"}
-  \end{aligned}
-$$
+```text
+ exp  ::=  "if" exp "then" exp "else" exp
+        |  "fun" var "->" exp
+        |  "let" var "=" exp "in" exp
+        |  "let rec" var var "=" exp "in" exp
+        |  cexp
+cexp  ::=  sexp "<=" sexp  |  sexp
+sexp  ::=  sexp "+" mexp  |  sexp "-" mexp  |  mexp
+mexp  ::=  mexp "*" aexp  |  aexp
+aexp  ::=  aexp pexp  |  pexp
+pexp  ::=  var  |  con  |  "(" exp ")"
+```
 The resulting linearization functions are as follows:
 ```ocaml
 let rec exp e = match e with

@@ -1,11 +1,11 @@
 # Exercise 5.7.1
 
-> Declare the constructor type $\mathit{nat}$ in OCaml and declare functions for addition, multiplication, and exponentiation.
-> Also declare functions converting between nonnegative machine integers and constructor numbers.
+> Declare the constructor type `nat` in OCaml and declare functions for addition, multiplication, and exponentiation.
+> Also declare functions converting between non-negative machine integers and constructor numbers.
 
 ---
 
-We can declare the type $\mathit{nat}$ as follows:
+We can declare the type `nat` as follows:
 ```ocaml
 type nat = Zero | Succ of nat
 ```

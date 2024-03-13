@@ -1,6 +1,6 @@
 # Exercise 5.3.3
 
-> Declare a function $\mathit{int} \to \mathit{string}$ linearizing numbers.
+> Declare a function `int → string` linearizing numbers.
 > As it comes to strings, all you need are string concatenation and string constants (e.g., `"5"`).
 > First write a function converting digits 0, …, 9 into singleton strings `"0"`, …, `"9"`.
 
@@ -23,14 +23,14 @@ let string_of_digit d =
   | _ -> failwith "string_of_digit"
 ```
 
-We then declare a function $\mathit{string\_of\_int}'$ that converts positive integers to strings:
+We then declare a function `string_of_int'` that converts positive integers to strings:
 ```ocaml
 let rec string_of_int' n =
   if n = 0 then ""
   else (string_of_int' (n / 10)) ^ (string_of_digit (n mod 10))
 ```
 
-Finally, we declare $\mathit{string\_of\_int}$ as a wrapper function around $\mathit{string\_of\_int}'$:
+Finally, we declare `string_of_int` as a wrapper function around `string_of_int'`:
 ```ocaml
 let string_of_int n =
   if n = 0 then "0"

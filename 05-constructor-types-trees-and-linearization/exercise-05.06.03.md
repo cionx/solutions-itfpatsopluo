@@ -1,26 +1,24 @@
 # Exercise 5.6.3
 
 > Extend the grammar for abstract expressions and the above development with pair expressions and projections:
-> $$
->   e \Coloneqq \cdots \mid (e_1 , e_2) \mid \pi_1 \; e \mid π_2 \; e
-> $$
-> As concrete syntax for the projections π1 and π2 you may choose the identifiers $\mathsf{fst}$ and $\mathsf{snd}$.
+> ```text
+>   e ::= ...  |  (e1, e2)  |  π1 e  |  π2 e
+> ```
+> As concrete syntax for the projections `π1` and `π2` you may choose the identifiers `fst` and `snd`.
 
 ---
 
 We now have the following abstract syntax:
-$$
-\begin{aligned}
-  e \Coloneqq{}& x \mid c \mid e_1 \; o \; e_2 \mid e_1 \; e_2 \\
-  \mid{}& (e_1, e_2) \mid \pi_1 \; e \mid \pi_2 \; e \\
-  \mid{}& \text{if } e_1 \text{ then } e_2 \text{ else } e_3 \\
-  \mid{}& \lambda x. e \\
-  \mid{}& \text{let } x = e_1 \text{ in } e_2 \\
-  \mid{}& \text{let rec } f \;x = e_1 \text{ in } e_2
-\end{aligned}
-$$
+```text
+e  ::=  x  |  c  |  e1 o e2  |  e1 e2
+     |  (e1, e2)  |  π1 e  |  π2 e
+     |  if e1 then e2 else e3
+     |  λ x. e
+     |  let x = e1 in e2
+     |  let rec f x = e1 in e2
+```
 
-We must extend the type $\mathit{exp}$ correspondingly:
+We must extend the type `exp` correspondingly:
 ```ocaml
 type var = string
 type con = Bcon of bool | Icon of int
@@ -40,21 +38,19 @@ type exp =
 ```
 
 Next we need to extend the linearization grammar.
-We treat the constructors $π_1$ and $π_2$ on the same level as function application and pairs on the level of a parenthesized expression:
-$$
-  \begin{aligned}
-    \mathit{exp} \Coloneqq{}& \texttt{"if"} \enspace \mathit{exp} \enspace \texttt{"then"} \enspace \mathit{exp} \enspace \texttt{"else"} \enspace \mathit{exp} \\
-    \mid{}& \texttt{"fun"} \enspace \mathit{var} \enspace \texttt{"->"} \enspace \mathit{exp} \\
-    \mid{}& \texttt{"let"} \enspace \mathit{var} \enspace \texttt{"="} \enspace \mathit{exp} \enspace \texttt{"in"} \enspace \mathit{exp} \\
-    \mid{}& \texttt{"let rec"} \enspace \mathit{var} \enspace \mathit{var} \enspace \texttt{"="} \enspace \mathit{exp} \enspace \texttt{"in"} \enspace \mathit{exp} \\
-    \mid{}& \mathit{cexp} \\
-    \mathit{cexp} \Coloneqq{}& \mathit{sexp} \enspace \texttt{"<="} \enspace \mathit{sexp} \mid \mathit{sexp} \\
-    \mathit{sexp} \Coloneqq{}& \mathit{sexp} \enspace \texttt{"+"} \enspace \mathit{mexp} \mid \mathit{sexp} \enspace \texttt{"-"} \enspace \mathit{mexp} \mid \mathit{mexp} \\
-    \mathit{mexp} \Coloneqq{}& \mathit{mexp} \enspace \texttt{"*"} \enspace \mathit{aexp} \mid \mathit{aexp} \\
-    \mathit{aexp} \Coloneqq{}& \mathit{aexp} \enspace \mathit{pexp} \mid \texttt{fst} \; \mathit{pexp} \mid \texttt{snd} \; \mathit{pexp} \mid \mathit{pexp} \\
-    \mathit{pexp} \Coloneqq{}& \mathit{var} \mid \mathit{con} \mid \texttt{"("} \enspace \mathit{exp} \enspace \texttt{","} \enspace \mathit{exp} \enspace \texttt{")"} \mid \texttt{"("} \enspace \mathit{exp} \enspace \texttt{")"}
-  \end{aligned}
-$$
+We treat the constructors `π1` and `π2` on the same level as function application and pairs on the level of a parenthesized expression:
+```text
+ exp  ::=  "if" exp "then" exp "else" exp
+        |  "fun" var "->" exp
+        |  "let" var "=" exp "in" exp
+        |  "let rec" var var "=" exp "in" exp
+        |  cexp
+cexp  ::=  sexp "<=" sexp  |  sexp
+sexp  ::=  sexp "+" mexp  |  sexp "-" mexp  |  mexp
+mexp  ::=  mexp "*" aexp  |  aexp
+aexp  ::=  aexp pexp  |  "fst" pexp  |  "snd" pexp  |  pexp
+pexp  ::=  var  |  con  |  "(" exp "," exp ")"  |  "(" exp ")"
+```
 
 Finally, we extend the linearization functions:
 ```ocaml

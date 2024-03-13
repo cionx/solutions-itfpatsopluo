@@ -1,20 +1,18 @@
 # Exercise 5.5.4
 
-> Declare functions that for ABC-trees yield the infix linearization where both $B$ and $C$ are left-associative and take their arguments at the same level.
-> Think of $B$ and $C$ as addition and subtraction.
+> Declare functions that for ABC-trees yield the infix linearization where both `B` and `C` are left-associative and take their arguments at the same level.
+> Think of `B` and `C` as addition and subtraction.
 > Give a linearization grammar first.
 
 ---
 
 We propose the following linearization grammar:
-$$
-  \begin{aligned}
-    \mathit{tree} &\Coloneqq \mathit{btree} \mid \mathit{ctree} \\
-    \mathit{btree} &\Coloneqq \mathit{tree} \; \mathtt{"B"} \; \mathit{ptree} \mid \mathit{ptree} \\
-    \mathit{ctree} &\Coloneqq \mathit{tree} \; \mathtt{"C"} \; \mathit{ptree} \mid \mathit{ptree} \\
-    \mathit{ptree} &\Coloneqq \mathtt{"A"} \mid \mathtt{"("} \; \mathit{tree} \; \mathtt{")"}
-  \end{aligned}
-$$
+```text
+ tree  ::=  btree  |  ctree
+btree  ::=  tree "B" ptree  |  ptree
+ctree  ::=  tree "C" ptree  |  ptree
+ptree  ::=  "A"  |  "(" tree ")"
+```
 The resulting linearization functions are as follows:
 ```ocaml
 let rec tree t = match t with

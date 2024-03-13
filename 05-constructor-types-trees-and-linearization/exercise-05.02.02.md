@@ -1,24 +1,15 @@
 # Exercise 5.2.2
 
-> Define and declare a function $\mathit{breadth} : \mathit{tree} \to \mathbb{N}$ that yields the number of leaves a tree has.
+> Define and declare a function `breadth : tree → N` that yields the number of leaves a tree has.
 
 ---
 
 We can declare this function as follows:
-$$
-  \begin{gathered}
-    \mathit{breadth} : \mathit{tree} \to \mathbb{N} \,, \\
-    \begin{aligned}
-      \mathit{breadth} \enspace A
-      &\coloneqq
-      1 \,,
-      \\
-      \mathit{breadth} \enspace (B \; t_1 \; t_2)
-      &\coloneqq
-      \mathit{breadth} \enspace t_1 + \mathit{breadth} \enspace t_2 \,.
-    \end{aligned}
-  \end{gathered}
-$$
+```
+        breadth : tree → N
+        breadth A :=  1
+breadth B(t1, t2) := breadth t1 + breadth t2
+```
 In OCaml code:
 ```ocaml
 let rec breadth t =
