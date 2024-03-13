@@ -1,6 +1,6 @@
 # Exercise 7.4.1
 
-> Rewrite the function $\mathit{lex}$ so that no patterns with `when` conditions are used.
+> Rewrite the function `lex` so that no patterns with `when` conditions are used.
 > Use nested conditionals instead.
 
 ---

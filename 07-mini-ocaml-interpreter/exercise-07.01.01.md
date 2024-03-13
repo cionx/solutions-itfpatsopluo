@@ -1,6 +1,6 @@
 # Exercise 7.1.1
 
-> Write a tail-recursive faculty function $n!$ in Mini-OCaml.
+> Write a tail-recursive faculty function `n!` in Mini-OCaml.
 > First write the expression in OCaml, then translate it into the abstract syntax of Mini-OCaml in OCaml.
 
 ---
