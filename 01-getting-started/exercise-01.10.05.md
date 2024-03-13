@@ -1,35 +1,32 @@
 # Exercise 1.10.5
 
-> Declare inverse functions for the following functions:  
-> a) $\lambda n. n^3$,  
-> b) $\lambda n. n^k$ for $k ≥ 2$,  
-> c) $\lambda n. k^n$ for $k ≥ 2$.
+> Declare inverse functions for the following functions:
+> 1. `λ n. n^3`,
+> 2. `λ n. n^k` for `k >= 2`,
+> 3. `λ n. k^n` for `k >= 2`.
 
 ---
 
-### a)
+### 1.
 
 We can use the rounded-down cube root function from Exercise 1.10.3:
-$$
-  \mathit{cbrt} \; x
-  \coloneqq
-  \mathit{first} \; (\lambda k. (k + 1)^3 > x) \; 0 \,.
-$$
+```ocaml
+  cbrt : N → N
+cbrt x := first (λ k. (k + 1)^3 > x) 0
+```
 
-### b)
+### 2.
 
-We can use the rounded-down root function $\lfloor \sqrt[k]{x} \rfloor$:
-$$
-  \mathit{root} \; k \; x
-  \coloneqq
-  \mathit{first} \; (\lambda n. (n + 1)^k > x) \; 0 \,.
-$$
+We can use the rounded-down root function `⌊ᵏ√x⌋`:
+```text
+  root : N → N
+root x := first (λ n. (n + 1)^k > x) 0
+```
 
-### c)
+### 3.
 
-We can use the rounded-down logarithm function $\lfloor \log_k x \rfloor$:
-$$
-  \mathit{log} \; k \; x
-  \coloneqq
-  \mathit{first} \; (\lambda n. k^{n + 1} > x) \; 0 \,.
-$$
+We can use the rounded-down logarithm function `⌊log_k x⌋`:
+```text
+  log : N → N
+log x := first (λ n. k^(n + 1) > x) 0
+```

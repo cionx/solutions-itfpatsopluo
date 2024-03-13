@@ -1,52 +1,42 @@
 # Exercise 1.9.3 (Sum functions)
 
-> a) Define a function $\mathbb{N} \to \mathbb{N}$ computing the sum $0 + 1 + 2 + \dotsb + n$ of the first $n$ numbers.  
-> b) Define a function $\mathbb{N \to N}$ computing the sum $0 + 1^2 + 2^2 + \dotsb + n^2$ of the first $n$ square numbers.  
-> c) Define a function $\mathit{sum} \colon (\mathbb{N} \to \mathbb{N}) \to \mathbb{N} \to \mathbb{N}$ computing for a given function $f$ the sum $f(0) + f(1) + f(2) + \dotsb + f(n)$.  
-> d) Give partial applications of the function sum from c) providing specialized sum functions as asked for by a) and b).
+> 1. Define a function `N → N` computing the sum `0 + 1 + 2 + ... + n` of the first `n` numbers.
+> 2. Define a function `N → N` computing the sum `0 + 1^2 + 2^2 + ... + n^2` of the first `n` square numbers.
+> 3. Define a function `sum : (N → N) → N → N` computing for a given function `f` the sum `f(0) + f(1) + f(2) + ... + f(n)`.
+> 4. Give partial applications of the function `sum` from 3 providing specialized sum functions as asked for by 1 and 2.
 
 ---
 
-### a)
+### 1.
 
-We can define this function as
-$$
-  s_1 \; n
-  \coloneqq
-  \begin{cases}
-    0                & \text{if $n = 0$,} \\
-    n + f \; (n - 1) & \text{if $n > 0$.}
-  \end{cases}
-$$
+We can define this function as follows:
+```text
+        s1 : N → N
+      s1 0 := 0
+s1 (n + 1) := (n + 1) + s1 n
+```
 
-### b)
+### 2.
 
-We can define this function as
-$$
-  s_2 \; n
-  \coloneqq
-  \begin{cases}
-    0                  & \text{if $n = 0$,} \\
-    n^2 + f \; (n - 1) & \text{if $n > 0$.}
-  \end{cases}
-$$
+We can define this function as follows:
+```text
+        s2 : N → N
+      s2 0 := 0
+s2 (n + 1) := (n + 1)^2 + s2 n
+```
 
-### c)
-We can define this function as
-$$
-  \mathit{sum} \; f \; n
-  \coloneqq
-  \begin{cases}
-    f \; 0                                & \text{if $n = 0$,} \\
-    f \; n + \mathit{sum} \; f \; (n - 1) & \text{if $n > 0$.}
-  \end{cases}
-$$
+### 3.
+We can define this function as follows:
+```text
+          sum : (N → N) → N → N
+      sum f 0 := f 0
+sum f (n + 1) := f (n + 1) + sum f n
+```
 
-### d)
+### 4.
 
-We can express the functions $s_1$ and $s_2$ in terms of $\mathit{sum}$ as
-$$
-  s_1 = \mathit{sum} \; (\lambda x. x) \,,
-  \quad
-  s_2 = \mathit{sum} \; (\lambda x. x^2) \,.
-$$
+We can express the functions `s1` and `s2` in terms of `sum` as follows:
+```text
+s1 = sum (λ x. x)
+s2 = sum (λ x. x^2)
+```

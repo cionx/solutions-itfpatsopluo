@@ -1,21 +1,21 @@
 # Exercise 1.12.2 (Sorting triples)
 
-> Declare a function $\mathit{sort}$ sorting triples.
-> For instance, we want $\mathit{sort} \; (3, 2, 1) = (1, 2, 3)$.
+> Declare a function `sort` sorting triples.
+> For instance, we want `sort (3, 2, 1) = (1, 2, 3)`.
 > Designing such a function is interesting.
-> Given a triple $(x, y, z)$, the best solution we know of first ensures $y \leq z$ and then inserts $x$ at the correct position.
+> Given a triple `(x, y, z)`, the best solution we know of first ensures `y <= z` and then inserts `x` at the correct position.
 > Start from the code snippet
 > ```ocaml
-> let sort (x,y,z) =
->   let (y,z) = if y <= z then (y,z) else (z, y) in
+> let sort (x, y, z) =
+>   let (y, z) = if y <= z then (y, z) else (z, y) in
 >   if x <= y then ...
 >   else ...
 > ```
-> where the local declaration ensures $y \leq z$ using shadowing.
+> where the local declaration ensures `y <= z` using shadowing.
 
 ---
 
-We can complete the code snippet as follows:
+We can complete the given code snippet as follows:
 ```ocaml
 let sort (x, y, z) =
   let (y, z) = if y <= z then (y, z) else (z, y) in

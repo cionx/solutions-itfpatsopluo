@@ -1,6 +1,6 @@
 # Exercise 1.10.1
 
-> Give a trace for $\mathit{sqrt} \mathop{} 10$.
+> Give a trace for `sqrt 10`.
 
 ---
 

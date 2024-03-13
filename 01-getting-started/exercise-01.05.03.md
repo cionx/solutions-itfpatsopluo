@@ -8,7 +8,7 @@
 >  gcd 153 33
 >  my_mod 17 5
 > ```
-> We remark that the functions $\mathit{rev}'$, $\mathit{gcd}$, and $\mathit{my\_mod}$ employ a special form of recursion known as tail recursion.
+> We remark that the functions `rev'`, `gcd`, and `my_mod` employ a special form of recursion known as tail recursion.
 > We will discuss tail recursion in §1.11.
 
 ---

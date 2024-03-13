@@ -10,7 +10,7 @@ We can declare the binary minimum function as follows:
 ```ocaml
 let min x y : int = if x <= y then x else y
 ```
-This function is of type $\mathit{int} \to \mathit{int} \to \mathit{int}$.
+This function is of type `int → int → int`.
 
 The trinary minimum function can be declared in the following ways:
 ```ocaml
@@ -24,4 +24,4 @@ let min3'' x y z : int =
   let a = (if x <= y then x else y) in
   (if a <= z then a else z)
 ```
-These functions are of type $\mathit{int} \to \mathit{int} \to \mathit{int} \to \mathit{int}$.
+These functions are of type `int → int → int → int`.

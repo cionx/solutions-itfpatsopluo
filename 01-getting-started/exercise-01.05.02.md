@@ -1,7 +1,7 @@
 # Exercise 1.5.2 (Maximal digit)
 
 > Declare a function that yields the maximal digit of the decimal representation of a number.
-> For instance, the maximal digit of $376$ is $7$.
+> For instance, the maximal digit of `376` is `7`.
 
 ---
 

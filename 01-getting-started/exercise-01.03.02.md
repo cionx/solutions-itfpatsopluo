@@ -1,8 +1,8 @@
 # Exercise 1.3.2
 
-> Declare functions $\mathit{int} \to \mathit{int} \to \mathit{bool}$ providing the comparisons $x = y$, $x \neq y$, $x < y$, $x \leq y$, $x > y$, and $x \geq y$.
-> Do this by just using conditionals and comparisons $x \leq y$.
-> Then realize $x \leq y$ with $x \leq 0$ and subtraction.
+> Declare functions `int → int → bool` providing the comparisons `x = y`, `x ≠ y`, `x < y`, `x <= y`, `x > y`, and `x >= y`.
+> Do this by just using conditionals and comparisons `x <= y`.
+> Then realize `x <= y` with `x <= 0` and subtraction.
 
 ---
 
@@ -30,7 +30,7 @@ let greater_equal x y =
   y <= x
 ```
 
-We can realize $x \leq y$ as follows:
+We can realize `x <= y` as follows:
 ```ocaml
 let less_equal' x y =
   x - y <= 0

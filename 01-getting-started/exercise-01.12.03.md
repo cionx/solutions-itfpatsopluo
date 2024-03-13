@@ -1,7 +1,7 @@
 # Exercise 1.12.3 (Medians)
 
 > The median of three numbers is the number in the middle.
-> For instance, the median of 5, 0, 1 is 1.
+> For instance, the median of `5`, `0`, `1` is `1`.
 > Declare a function that takes three numbers and yields the median of the numbers.
 
 ---

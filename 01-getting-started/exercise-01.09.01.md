@@ -1,19 +1,19 @@
 # Exercise 1.9.1
 
-> a) Write $\lambda x y k. (k + 1) \cdot y > x$ as a nested lambda expression.  
-> b) Write $\mathit{test} \; 11 \; 3 \; 10$ as a nested application.  
-> c) Write $\mathit{int} \to \mathit{int} \to \mathit{int} \to \mathit{bool}$ as a nested function type.
+> 1. Write `λ x y k. (k + 1) * y > x` as a nested lambda expression.
+> 2. Write `test 11 3 10` as a nested application.
+> 3. Write `int → int → int → bool` as a nested function type.
 
 ---
 
-### a)
+### 1.
 
-$\lambda x. \lambda y. \lambda k. (k + 1) \cdot y > x$
+`λ x. λ y. λ k. (k + 1) * y > x`
 
-### b)
+### 2.
 
-$\mathit{test} \; 11 \; 3 \; 10 = ((\mathit{test} \; 11) \; 3) \; 10$
+`test 11 3 10 = ((test 11) 3) 10`
 
-### c)
+### 3.
 
-$\mathit{int} \to (\mathit{int} \to (\mathit{int} \to \mathit{bool}))$
+`int → (int → (int → bool))`

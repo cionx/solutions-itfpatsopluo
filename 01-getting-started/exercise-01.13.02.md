@@ -1,7 +1,7 @@
 # Exercise 1.13.2 (Sorting triples)
 
 > Recall Exercise 1.12.2.
-> With lazy boolean connectives a function sorting triples can be written without much thinking by doing a naive case analysis considering the alternatives $x$ is in the middle or $y$ is in the middle or $z$ is in the middle.
+> With lazy boolean connectives a function sorting triples can be written without much thinking by doing a naive case analysis considering the alternatives `x` is in the middle or `y` is in the middle or `z` is in the middle.
 
 ---
 

@@ -3,7 +3,7 @@
 > To what value does the program
 > ```ocaml
 > let a = 2 let a = a * a let a = a * a
->   ```
+> ```
 > bind the identifier `a`?
 
 ---
