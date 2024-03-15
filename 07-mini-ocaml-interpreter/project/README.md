@@ -7,7 +7,7 @@ After starting it, you will be greeted by an input prompt:
 ```text
 >
 ```
-Here are some example of its usage:
+Here are some examples of its usage:
 ```text
 > help
 Usage: "type <expr>" or "eval <expr>"
