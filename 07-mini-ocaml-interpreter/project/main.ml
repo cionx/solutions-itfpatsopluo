@@ -28,16 +28,21 @@ let split s l =
 
 let rec main () =
   let help = "Usage: \"type <expr>\" or \"eval <expr>\"" in
-  let loop () =
+  let rec loop () =
+    print_string "> ";
     let input = read_line () in
-    let output =
-      if String.length input >= 5 then
-        match split input 5 with
-        | "type ", s -> lin_ty (checkStr s)
-        | "eval ", s -> lin_value (evalStr s)
-        | _ -> help
-      else help
-    in print_endline output; main ()
+    try
+      let output =
+        if String.length input >= 5 then
+          match split input 5 with
+          | "type ", s -> lin_ty (checkStr s)
+          | "eval ", s -> lin_value (evalStr s)
+          | _ -> help
+        else help
+      in print_endline output; loop ()
+    with
+      Failure message ->
+      print_endline ("Failure: " ^ message); loop ()
   in loop ()
 
 let _ = main ()
